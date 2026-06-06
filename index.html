@@ -4,393 +4,421 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ItsXliLix — Constrói o teu income online</title>
-<meta name="description" content="O manual prático de como construir uma operação real de conteúdo online — Pornhub, Telegram e OnlyFans. Sem promessas vazias.">
+<meta name="description" content="Manual prático sobre como construir um negócio online sustentável. Escrito por quem está dentro do mercado.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#ffffff;
-  --bg-2:#fafaf8;
-  --ink:#0e0c08;
-  --ink-2:#2a241b;
-  --muted:#7a6f60;
-  --muted-2:#b3a89a;
-  --line:rgba(14,12,8,0.08);
-  --line-2:rgba(14,12,8,0.16);
-  --surface:#f4f0e6;
-  --surface-2:#e8e2d2;
-  --accent:#6e1c2e;
-  --accent-2:#962d44;
-  --accent-3:#3c0d18;
+  --surface:#fafaf9;
+  --surface-2:#f5f5f4;
+  --border:rgba(10,10,10,0.06);
+  --border-2:rgba(10,10,10,0.12);
+  --border-3:rgba(10,10,10,0.2);
+  --ink:#0a0a0a;
+  --ink-2:#404040;
+  --muted:#737373;
+  --muted-2:#a3a3a3;
+  --accent:#7c1d3a;
+  --accent-2:#9e2244;
+  --accent-3:#5a1429;
+  --accent-soft:rgba(124,29,58,0.06);
   --rose:#c4889e;
-  --gold:#8a6520;
-  --success:#4a7050;
-  --r:6px;
-  --r-lg:14px;
-  --ease:cubic-bezier(.2,.7,.2,1);
+  --shadow-sm:0 1px 2px rgba(10,10,10,0.04);
+  --shadow-md:0 4px 16px rgba(10,10,10,0.06);
+  --shadow-lg:0 16px 48px rgba(10,10,10,0.08);
+  --shadow-accent:0 12px 32px rgba(124,29,58,0.18);
+  --ease:cubic-bezier(.22,.61,.36,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 body{
-  font-family:'Manrope',system-ui,sans-serif;
-  background:var(--bg);
-  color:var(--ink);
-  line-height:1.6;
-  font-size:16px;
-  font-weight:400;
+  font-family:'Geist',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  background:var(--bg);color:var(--ink);
+  font-size:16px;line-height:1.55;font-weight:400;
+  letter-spacing:-0.005em;
   overflow-x:hidden;
-  background-image:
-    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(110,28,46,0.05), transparent 70%),
-    radial-gradient(ellipse 40% 30% at 100% 30%, rgba(196,136,158,0.06), transparent 70%);
-  background-attachment:fixed;
 }
+.mono{font-family:'Geist Mono',ui-monospace,monospace;letter-spacing:0}
 ::selection{background:var(--accent);color:#fff}
+
+body::before{
+  content:"";position:fixed;inset:0;z-index:-1;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(124,29,58,0.05), transparent 70%),
+    radial-gradient(ellipse 50% 30% at 100% 30%, rgba(196,136,158,0.06), transparent 70%),
+    radial-gradient(ellipse 40% 30% at 0% 60%, rgba(90,20,41,0.03), transparent 70%);
+}
 
 .nav{
   position:sticky;top:0;z-index:50;
-  background:rgba(255,255,255,0.78);
-  backdrop-filter:blur(18px) saturate(140%);
-  border-bottom:1px solid var(--line);
+  background:rgba(255,255,255,0.72);
+  backdrop-filter:blur(24px) saturate(180%);
+  -webkit-backdrop-filter:blur(24px) saturate(180%);
+  border-bottom:1px solid var(--border);
 }
-.nav-in{max-width:1180px;margin:0 auto;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav-in{
+  max-width:1200px;margin:0 auto;
+  padding:14px 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+}
 .logo{
-  font-family:'Instrument Serif',serif;
-  font-size:24px;font-weight:400;
-  letter-spacing:-0.5px;
-  display:flex;align-items:center;gap:10px;
+  font-size:16px;font-weight:600;letter-spacing:-0.02em;
+  display:flex;align-items:center;gap:9px;color:var(--ink);
+  text-decoration:none;
 }
-.logo b{font-weight:400}
-.logo em{font-style:italic;color:var(--accent);font-weight:400}
 .logo-mark{
-  width:7px;height:7px;border-radius:50%;background:var(--accent);
-  box-shadow:0 0 0 4px rgba(110,28,46,0.08);
+  width:6px;height:6px;border-radius:2px;background:var(--accent);
+  box-shadow:0 0 0 3px var(--accent-soft);
 }
+.logo span{color:var(--accent);font-weight:700}
 .nav-cta{
-  padding:10px 20px;background:var(--ink);color:#fff;
-  border:none;border-radius:100px;font-family:inherit;font-size:13px;font-weight:600;
-  cursor:pointer;text-decoration:none;letter-spacing:0.1px;
-  transition:all 0.3s var(--ease);
-  position:relative;overflow:hidden;
+  padding:9px 16px;background:var(--ink);color:#fff;
+  border:none;border-radius:8px;
+  font-family:inherit;font-size:13px;font-weight:500;letter-spacing:-0.01em;
+  cursor:pointer;text-decoration:none;
+  transition:all 0.2s var(--ease);
 }
-.nav-cta:hover{background:var(--accent);transform:translateY(-1px)}
+.nav-cta:hover{background:var(--accent);transform:translateY(-1px);box-shadow:var(--shadow-accent)}
 .nav-cta:active{transform:translateY(0)}
 
 .hero{
-  max-width:1180px;margin:0 auto;
-  padding:140px 32px 120px;
+  max-width:1100px;margin:0 auto;
+  padding:120px 24px 100px;
   text-align:center;
+}
+.badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 12px 6px 8px;
+  background:var(--bg);border:1px solid var(--border-2);
+  border-radius:100px;
+  font-size:12px;font-weight:500;color:var(--ink-2);letter-spacing:-0.01em;
+  margin-bottom:36px;
+  box-shadow:var(--shadow-sm);
+}
+.badge-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+
+.hero h1{
+  font-size:clamp(48px,7vw,80px);
+  font-weight:600;line-height:1.04;letter-spacing:-0.04em;
+  margin-bottom:28px;color:var(--ink);
+  max-width:780px;margin-left:auto;margin-right:auto;
+}
+.hero h1 .acc{color:var(--accent)}
+
+.hero .lead{
+  font-size:18px;line-height:1.55;color:var(--ink-2);
+  max-width:560px;margin:0 auto 40px;font-weight:400;
+}
+
+.cta-row{display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap}
+.btn{
+  padding:14px 24px;border-radius:10px;
+  font-family:inherit;font-size:14px;font-weight:500;letter-spacing:-0.01em;
+  cursor:pointer;border:none;
+  transition:all 0.2s var(--ease);
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-primary{
+  background:var(--ink);color:#fff;
+  box-shadow:var(--shadow-md);
+}
+.btn-primary:hover{background:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow-accent)}
+.btn-primary:active{transform:translateY(0)}
+.btn-primary:disabled{opacity:0.6;cursor:wait;transform:none}
+.btn-secondary{
+  background:transparent;color:var(--ink);border:1px solid var(--border-2);
+}
+.btn-secondary:hover{border-color:var(--ink);background:var(--surface)}
+.btn-arrow{display:inline-block;transition:transform 0.2s var(--ease)}
+.btn-primary:hover .btn-arrow{transform:translateX(3px)}
+
+.meta-row{
+  display:flex;justify-content:center;gap:32px;margin-top:32px;
+  font-size:13px;color:var(--muted);
+}
+.meta-row span{display:inline-flex;align-items:center;gap:6px}
+.meta-row .check{width:14px;height:14px;color:var(--accent)}
+
+.sec{
+  max-width:1200px;margin:0 auto;
+  padding:100px 24px;
   position:relative;
 }
-.hero-eye{
+.sec::before{
+  content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:100%;max-width:900px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--border-2) 30%,var(--border-2) 70%,transparent);
+}
+.sec-head{margin-bottom:56px;max-width:720px}
+.sec-eyebrow{
+  font-family:'Geist Mono',monospace;font-size:11px;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:16px;font-weight:500;
   display:inline-flex;align-items:center;gap:8px;
-  font-family:'Instrument Serif',serif;
-  font-size:14px;letter-spacing:1.5px;text-transform:uppercase;
-  color:var(--accent);margin-bottom:36px;font-weight:400;font-style:italic;
 }
-.hero-eye::before, .hero-eye::after{
-  content:"";width:24px;height:1px;background:var(--accent);opacity:0.4;
-}
-.hero h1{
-  font-family:'Instrument Serif',serif;
-  font-size:clamp(56px,9vw,128px);
-  font-weight:400;line-height:0.94;letter-spacing:-3px;
-  margin-bottom:40px;max-width:1080px;margin-left:auto;margin-right:auto;
-}
-.hero h1 em{
-  font-style:italic;font-weight:400;
-  color:var(--accent);
-  position:relative;display:inline-block;
-}
-.hero h1 em::after{
-  content:"";position:absolute;bottom:8px;left:0;right:0;height:6px;
-  background:rgba(196,136,158,0.35);
-  z-index:-1;border-radius:3px;
-  transform:scaleX(0.92);transform-origin:left;
-  animation:underline-in 1.2s 0.4s var(--ease) both;
-}
-@keyframes underline-in{
-  from{transform:scaleX(0)}
-  to{transform:scaleX(0.92)}
-}
-.hero p.lead{
-  font-size:21px;line-height:1.5;color:var(--ink-2);
-  max-width:620px;margin:0 auto 56px;font-weight:400;
-}
-.cta-row{display:flex;gap:18px;justify-content:center;align-items:center;flex-wrap:wrap}
-.btn-buy{
-  padding:20px 40px;
-  background:var(--ink);
-  color:#fff;border:none;border-radius:100px;
-  font-family:inherit;font-size:15px;font-weight:600;letter-spacing:0.1px;
-  cursor:pointer;
-  transition:all 0.35s var(--ease);
-  position:relative;overflow:hidden;
-}
-.btn-buy::before{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(135deg,var(--accent),var(--accent-2));
-  opacity:0;transition:opacity 0.35s var(--ease);
-}
-.btn-buy span{position:relative;z-index:1}
-.btn-buy:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(110,28,46,0.25)}
-.btn-buy:hover::before{opacity:1}
-.btn-buy:active{transform:translateY(0)}
-.btn-buy:disabled{opacity:0.6;cursor:wait;transform:none}
-.price-mini{color:var(--muted);font-size:14px;letter-spacing:0.2px}
-.price-mini strong{color:var(--ink);font-weight:600}
-.price-mini em{font-style:normal;color:var(--muted)}
-
-.sec{max-width:1180px;margin:0 auto;padding:100px 32px;border-top:1px solid var(--line)}
-.sec-eye{
-  display:inline-flex;align-items:center;gap:10px;
-  font-family:'Instrument Serif',serif;
-  font-size:14px;letter-spacing:1px;text-transform:uppercase;
-  color:var(--accent);margin-bottom:24px;font-weight:400;font-style:italic;
-}
-.sec-eye::before{content:"";width:24px;height:1px;background:var(--accent);opacity:0.5}
+.sec-eyebrow::before{content:"";width:24px;height:1px;background:var(--accent);opacity:0.6}
 .sec h2{
-  font-family:'Instrument Serif',serif;
-  font-size:clamp(40px,6vw,72px);font-weight:400;line-height:1;
-  letter-spacing:-2px;margin-bottom:32px;max-width:820px;
+  font-size:clamp(36px,5vw,56px);font-weight:600;line-height:1.05;
+  letter-spacing:-0.035em;margin-bottom:16px;color:var(--ink);
 }
-.sec h2 em{font-style:italic;color:var(--accent);font-weight:400}
-.sec-lead{font-size:19px;color:var(--ink-2);max-width:680px;line-height:1.55;margin-bottom:40px}
+.sec h2 .acc{color:var(--accent)}
+.sec-lead{font-size:17px;color:var(--ink-2);line-height:1.55;max-width:580px}
 
-.mods{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:48px}
+.mods{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media (max-width:880px){.mods{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:520px){.mods{grid-template-columns:1fr}}
-.mod-card{
-  padding:28px 24px;background:var(--bg-2);border:1px solid var(--line);
-  border-radius:var(--r-lg);
-  transition:all 0.35s var(--ease);
-  position:relative;overflow:hidden;cursor:default;
-}
-.mod-card::before{
-  content:"";position:absolute;top:0;left:0;width:0;height:3px;
-  background:linear-gradient(90deg,var(--accent),var(--rose));
-  transition:width 0.5s var(--ease);
-}
-.mod-card:hover{
-  transform:translateY(-4px);
-  border-color:rgba(110,28,46,0.3);
-  box-shadow:0 16px 40px rgba(14,12,8,0.06);
-  background:#fff;
-}
-.mod-card:hover::before{width:100%}
-.mod-num{
-  font-family:'Instrument Serif',serif;
-  font-size:36px;color:var(--accent);margin-bottom:14px;font-weight:400;
-  line-height:1;letter-spacing:-1px;
-  opacity:0.85;
-}
-.mod-num em{font-style:italic;color:var(--rose)}
-.mod-card h3{
-  font-family:'Instrument Serif',serif;
-  font-size:24px;font-weight:400;line-height:1.1;margin-bottom:12px;letter-spacing:-0.5px;
-}
-.mod-card p{color:var(--muted);font-size:14px;line-height:1.5;font-weight:400}
-
-.price-block{
-  max-width:600px;margin:120px auto 0;padding:64px 48px;
-  background:linear-gradient(135deg,#0e0c08,#2a1c14);color:#fff;
-  border-radius:var(--r-lg);text-align:center;
+.mod{
+  padding:24px;
+  background:rgba(255,255,255,0.6);
+  border:1px solid var(--border);
+  border-radius:12px;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  transition:all 0.3s var(--ease);
   position:relative;overflow:hidden;
+  display:flex;flex-direction:column;gap:14px;
+}
+.mod::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 0%,transparent 80%,rgba(124,29,58,0.04) 100%);
+  opacity:0;transition:opacity 0.3s var(--ease);pointer-events:none;
+}
+.mod:hover{
+  border-color:var(--border-2);
+  transform:translateY(-3px);
+  box-shadow:var(--shadow-lg);
+  background:rgba(255,255,255,0.9);
+}
+.mod:hover::after{opacity:1}
+.mod-top{display:flex;align-items:center;justify-content:space-between}
+.mod-num{
+  font-family:'Geist Mono',monospace;
+  font-size:12px;font-weight:500;color:var(--muted);
+  letter-spacing:0.06em;
+}
+.mod-pill{
+  font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;
+  color:var(--accent);padding:3px 8px;border-radius:100px;
+  background:var(--accent-soft);
+  font-family:'Geist Mono',monospace;
+}
+.mod h3{
+  font-size:17px;font-weight:600;line-height:1.3;letter-spacing:-0.02em;color:var(--ink);
+}
+.mod p{
+  font-size:14px;line-height:1.55;color:var(--muted);font-weight:400;
+}
+
+.mod.featured{
+  background:var(--ink);color:#fff;
+  border-color:transparent;
+}
+.mod.featured .mod-num{color:rgba(255,255,255,0.5)}
+.mod.featured .mod-pill{background:rgba(196,136,158,0.2);color:var(--rose)}
+.mod.featured h3{color:#fff}
+.mod.featured p{color:rgba(255,255,255,0.7)}
+.mod.featured:hover{background:var(--accent);transform:translateY(-3px)}
+.mod.featured::after{background:linear-gradient(135deg,transparent,rgba(196,136,158,0.1))}
+
+.price-wrap{padding:0 24px 100px}
+.price-block{
+  max-width:560px;margin:0 auto;
+  padding:48px 40px;
+  background:linear-gradient(180deg,#0a0a0a 0%,#1a0e12 100%);
+  color:#fff;
+  border-radius:16px;
+  position:relative;overflow:hidden;
+  box-shadow:var(--shadow-lg);
 }
 .price-block::before{
   content:"";position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--rose),transparent);
+  background:linear-gradient(90deg,transparent,rgba(196,136,158,0.6),transparent);
 }
 .price-block::after{
-  content:"";position:absolute;
-  width:300px;height:300px;border-radius:50%;
-  background:radial-gradient(circle,rgba(196,136,158,0.15),transparent 70%);
-  top:-150px;right:-100px;
-  pointer-events:none;
+  content:"";position:absolute;width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(196,136,158,0.18),transparent 60%);
+  top:-200px;right:-150px;pointer-events:none;
 }
-.price-block .label{
-  font-family:'Instrument Serif',serif;
-  font-size:14px;letter-spacing:2px;text-transform:uppercase;color:var(--rose);
-  margin-bottom:24px;font-style:italic;font-weight:400;
+.price-row{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:6px;position:relative;z-index:1}
+.price-label{
+  font-family:'Geist Mono',monospace;font-size:11px;
+  letter-spacing:0.12em;text-transform:uppercase;color:var(--rose);font-weight:500;
 }
-.price-block .amount{
-  font-family:'Instrument Serif',serif;
-  font-size:120px;line-height:0.95;font-weight:400;letter-spacing:-4px;
-  margin-bottom:12px;
-  position:relative;z-index:1;
+.price-tag{
+  font-size:11px;color:rgba(255,255,255,0.5);padding:3px 8px;
+  border:1px solid rgba(255,255,255,0.15);border-radius:100px;
+  font-family:'Geist Mono',monospace;letter-spacing:0.04em;
 }
-.price-block .amount em{
-  font-style:italic;font-size:0.3em;letter-spacing:0;color:var(--rose);
-  vertical-align:top;margin-left:6px;font-weight:400;
+.price-amount{
+  font-size:80px;font-weight:600;line-height:1;letter-spacing:-0.04em;
+  margin:18px 0 8px;position:relative;z-index:1;
 }
-.price-block .sub{color:rgba(255,255,255,0.55);font-size:14px;letter-spacing:0.2px;margin-bottom:40px;position:relative;z-index:1}
-.price-block ul{list-style:none;padding:0;margin:0 0 40px;text-align:left;display:inline-block;position:relative;z-index:1}
-.price-block li{padding:10px 0 10px 26px;position:relative;color:rgba(255,255,255,0.85);font-size:14px;line-height:1.5}
-.price-block li::before{content:"";position:absolute;left:0;top:18px;width:14px;height:1px;background:var(--rose)}
-.price-block .btn-buy{
-  background:#fff;color:var(--ink);box-shadow:none;
-  font-weight:700;
-  position:relative;z-index:1;
+.price-amount .iva{
+  font-size:16px;font-weight:500;color:var(--rose);
+  vertical-align:top;margin-left:6px;letter-spacing:-0.01em;
+  font-family:'Geist Mono',monospace;
 }
-.price-block .btn-buy::before{background:var(--rose)}
-.price-block .btn-buy:hover{color:var(--ink);box-shadow:0 16px 40px rgba(196,136,158,0.3)}
-.price-block .small{margin-top:20px;font-size:12px;color:rgba(255,255,255,0.4);position:relative;z-index:1}
+.price-sub{
+  font-size:14px;color:rgba(255,255,255,0.55);margin-bottom:32px;position:relative;z-index:1;
+}
+.feat-list{list-style:none;padding:0;margin:0 0 36px;display:grid;gap:10px;position:relative;z-index:1}
+.feat-list li{
+  font-size:14px;color:rgba(255,255,255,0.82);padding-left:22px;position:relative;line-height:1.5;
+}
+.feat-list li::before{
+  content:"";position:absolute;left:0;top:7px;
+  width:12px;height:12px;border-radius:50%;
+  background:rgba(196,136,158,0.18);
+  border:1px solid rgba(196,136,158,0.4);
+}
+.feat-list li::after{
+  content:"";position:absolute;left:3px;top:10px;
+  width:6px;height:6px;border-radius:50%;background:var(--rose);
+}
+.price-block .btn-primary{
+  width:100%;background:#fff;color:var(--ink);
+  padding:16px;font-size:15px;font-weight:600;
+  position:relative;z-index:1;justify-content:center;
+}
+.price-block .btn-primary:hover{background:var(--rose);color:var(--ink)}
+.price-block .small{
+  margin-top:18px;font-size:12px;color:rgba(255,255,255,0.4);text-align:center;
+  position:relative;z-index:1;font-family:'Geist Mono',monospace;letter-spacing:0.02em;
+}
 
 .footer{
-  max-width:1180px;margin:0 auto;padding:60px 32px;
-  text-align:center;color:var(--muted);font-size:13px;
-  border-top:1px solid var(--line);
+  max-width:1200px;margin:0 auto;
+  padding:32px 24px;
+  border-top:1px solid var(--border);
   display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;
+  font-size:13px;color:var(--muted);
 }
 .footer a{color:var(--muted);text-decoration:none;transition:color 0.2s}
 .footer a:hover{color:var(--accent)}
-.footer-logo{font-family:'Instrument Serif',serif;font-size:18px;color:var(--ink)}
 
 @media (max-width:720px){
-  .hero{padding:90px 20px 70px}
+  .hero{padding:80px 20px 60px}
   .sec{padding:70px 20px}
-  .price-block{padding:48px 28px;margin:80px 20px 0}
-  .nav-in{padding:14px 20px}
+  .price-wrap{padding:0 20px 70px}
+  .price-block{padding:36px 24px}
+  .price-amount{font-size:64px}
+  .nav-in{padding:12px 20px}
+  .meta-row{gap:18px;flex-wrap:wrap}
 }
 
-.fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.9s var(--ease),transform 0.9s var(--ease)}
-.fade-in.visible{opacity:1;transform:translateY(0)}
-
-.mod-card{opacity:0;transform:translateY(20px);transition:opacity 0.7s var(--ease),transform 0.7s var(--ease),background 0.35s,border-color 0.35s,box-shadow 0.35s}
-.mod-card.visible{opacity:1;transform:translateY(0)}
-
-.cursor-dot{
-  position:fixed;width:8px;height:8px;border-radius:50%;
-  background:var(--accent);pointer-events:none;z-index:9999;
-  transform:translate(-50%,-50%);
-  transition:width 0.25s var(--ease),height 0.25s var(--ease),opacity 0.3s;
-  mix-blend-mode:multiply;opacity:0;
-}
-@media (hover:hover) and (pointer:fine){
-  .cursor-dot{opacity:0.6}
-}
-.cursor-dot.hovering{width:36px;height:36px;background:rgba(110,28,46,0.15)}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.8s var(--ease),transform 0.8s var(--ease)}
+.reveal.in{opacity:1;transform:translateY(0)}
+.mod.reveal{transition:opacity 0.7s var(--ease),transform 0.7s var(--ease),background 0.3s,border-color 0.3s,box-shadow 0.3s}
 </style>
 </head>
 <body>
 
-<div class="cursor-dot" id="cursorDot"></div>
-
 <nav class="nav">
   <div class="nav-in">
-    <div class="logo"><span class="logo-mark"></span><b>ItsXli</b><em>Lix</em></div>
-    <button class="nav-cta" onclick="buy()" data-cursor>Comprar — €60</button>
+    <a href="/" class="logo"><span class="logo-mark"></span>ItsXli<span>Lix</span></a>
+    <button class="nav-cta" onclick="buy()">Comprar — €60</button>
   </div>
 </nav>
 
 <header class="hero">
-  <div class="hero-eye">Manual prático</div>
-  <h1>Constrói o teu <em>income</em><br>online.</h1>
+  <div class="badge"><span class="badge-dot"></span>Manual prático · 2026</div>
+  <h1>Constrói o teu <span class="acc">income</span> online.</h1>
   <p class="lead">O manual prático de como construir uma operação real de conteúdo online — sem promessas vazias, sem fórmulas mágicas. Escrito por quem já o faz.</p>
   <div class="cta-row">
-    <button class="btn-buy" id="ctaTop" onclick="buy()" data-cursor><span>Comprar acesso — €60</span></button>
-    <span class="price-mini">Acesso <strong>vitalício</strong> · sem mensalidades · <em>€60 + IVA</em></span>
+    <button class="btn btn-primary" onclick="buy()"><span>Comprar acesso</span><span class="btn-arrow">→</span></button>
+    <button class="btn btn-secondary" onclick="document.getElementById('modulos').scrollIntoView({behavior:'smooth'})">Ver módulos</button>
+  </div>
+  <div class="meta-row">
+    <span><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Acesso vitalício</span>
+    <span><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Sem mensalidades</span>
+    <span><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Reembolso 7 dias</span>
   </div>
 </header>
 
-<section class="sec">
-  <div class="sec-eye">O que vais aprender</div>
-  <h2>12 módulos. <em>Sem tretas.</em></h2>
-  <p class="sec-lead">Cada módulo tem um quizz, frameworks práticos e o "Princípio universal" que mostra como o que aprendes se aplica a qualquer negócio digital — não só conteúdo adulto.</p>
+<section class="sec" id="modulos">
+  <div class="sec-head">
+    <div class="sec-eyebrow">O que vais aprender</div>
+    <h2>12 módulos. <span class="acc">Sem tretas.</span></h2>
+    <p class="sec-lead">Cada módulo tem um quizz, frameworks práticos e o "Princípio universal" que mostra como o conceito se aplica a qualquer negócio digital — não só conteúdo adulto.</p>
+  </div>
 
   <div class="mods">
-    <div class="mod-card"><div class="mod-num">0<em>1</em></div><h3>A realidade do mercado</h3><p>As verdades que ninguém te diz sobre os primeiros 90 dias.</p></div>
-    <div class="mod-card"><div class="mod-num">0<em>2</em></div><h3>Os 5 níveis de exposição</h3><p>Por que não tens de mostrar tudo para ganhar bem.</p></div>
-    <div class="mod-card"><div class="mod-num">0<em>3</em></div><h3>Limites &amp; mentalidade</h3><p>Os 4 limites que tens de definir antes de começar.</p></div>
-    <div class="mod-card"><div class="mod-num">0<em>4</em></div><h3>Persona &amp; posicionamento</h3><p>Como construir uma identidade que vende sozinha.</p></div>
-    <div class="mod-card"><div class="mod-num">0<em>5</em></div><h3>A arquitetura do funil</h3><p>Tráfego → comunidade → conversão. Decomposta.</p></div>
-    <div class="mod-card"><div class="mod-num">0<em>6</em></div><h3>Organizar o OnlyFans</h3><p>7 decisões + welcome ladder + templates. O módulo mais prático.</p></div>
-    <div class="mod-card"><div class="mod-num">0<em>7</em></div><h3>Psicologia &amp; vendas</h3><p>Os 4 motores da decisão de pagar.</p></div>
-    <div class="mod-card"><div class="mod-num">0<em>8</em></div><h3>Tráfego: motores reais</h3><p>Pornhub, X, Reddit, Instagram, TikTok — como dominar cada um.</p></div>
-    <div class="mod-card"><div class="mod-num">0<em>9</em></div><h3>Telegram &amp; comunidade</h3><p>Bots, cross-promo, semana-tipo real.</p></div>
-    <div class="mod-card"><div class="mod-num">1<em>0</em></div><h3>Conteúdo que converte</h3><p>Função &gt; volume. Calendário simples.</p></div>
-    <div class="mod-card"><div class="mod-num">1<em>1</em></div><h3>Demonstrar expertise</h3><p>A técnica multiplicadora que ninguém usa.</p></div>
-    <div class="mod-card"><div class="mod-num">1<em>2</em></div><h3>Saída &amp; diversificação</h3><p>A regra dos 3 anos. Onde colocar o dinheiro.</p></div>
+    <article class="mod"><div class="mod-top"><span class="mod-num">01</span></div><h3>A realidade do mercado</h3><p>As verdades que ninguém te diz sobre os primeiros 90 dias.</p></article>
+    <article class="mod"><div class="mod-top"><span class="mod-num">02</span></div><h3>Os 5 níveis de exposição</h3><p>Por que não tens de mostrar tudo para ganhar bem.</p></article>
+    <article class="mod"><div class="mod-top"><span class="mod-num">03</span></div><h3>Limites &amp; mentalidade</h3><p>Os 4 limites que tens de definir antes de começar.</p></article>
+    <article class="mod"><div class="mod-top"><span class="mod-num">04</span></div><h3>Persona &amp; posicionamento</h3><p>Como construir uma identidade que vende sozinha.</p></article>
+    <article class="mod"><div class="mod-top"><span class="mod-num">05</span></div><h3>A arquitetura do funil</h3><p>Tráfego → comunidade → conversão. Decomposta passo a passo.</p></article>
+    <article class="mod featured"><div class="mod-top"><span class="mod-num">06</span><span class="mod-pill">Prático</span></div><h3>Organizar o OnlyFans</h3><p>7 decisões, welcome ladder de 7 dias e templates prontos. O módulo mais aplicado.</p></article>
+    <article class="mod"><div class="mod-top"><span class="mod-num">07</span></div><h3>Psicologia &amp; vendas</h3><p>Os 4 motores da decisão de pagar.</p></article>
+    <article class="mod"><div class="mod-top"><span class="mod-num">08</span></div><h3>Tráfego: motores reais</h3><p>Pornhub, X, Reddit, Instagram, TikTok — como dominar cada um.</p></article>
+    <article class="mod"><div class="mod-top"><span class="mod-num">09</span></div><h3>Telegram &amp; comunidade</h3><p>Bots, cross-promo entre canais, semana-tipo real.</p></article>
+    <article class="mod"><div class="mod-top"><span class="mod-num">10</span></div><h3>Conteúdo que converte</h3><p>Função &gt; volume. Calendário de produção simples.</p></article>
+    <article class="mod"><div class="mod-top"><span class="mod-num">11</span></div><h3>Demonstrar expertise</h3><p>A técnica multiplicadora que ninguém usa.</p></article>
+    <article class="mod"><div class="mod-top"><span class="mod-num">12</span></div><h3>Saída &amp; diversificação</h3><p>A regra dos 3 anos. Onde colocar o dinheiro.</p></article>
   </div>
 </section>
 
-<section style="padding:0 32px 100px">
+<section class="price-wrap">
   <div class="price-block">
-    <div class="label">Acesso vitalício</div>
-    <div class="amount">€60<em>+IVA</em></div>
-    <div class="sub">pagamento único de €73,80 (com IVA 23%) · sem mensalidades</div>
-    <ul>
-      <li>12 módulos · ~150 páginas</li>
-      <li>Quizzes interativos</li>
-      <li>Templates: welcome message, mass message, semana-tipo</li>
-      <li>Welcome ladder de 7 dias</li>
-      <li>Acesso vitalício — incluindo atualizações</li>
-      <li>7 dias para reembolso total</li>
+    <div class="price-row">
+      <div class="price-label">Acesso vitalício</div>
+      <div class="price-tag">v1 · 2026</div>
+    </div>
+    <div class="price-amount">€60<span class="iva">+ IVA</span></div>
+    <div class="price-sub">Pagamento único de €73,80 (IVA 23% incluído). Sem mensalidades.</div>
+    <ul class="feat-list">
+      <li>12 módulos práticos · ~150 páginas</li>
+      <li>Quizzes interativos em cada módulo</li>
+      <li>Templates de welcome message, mass message e semana-tipo</li>
+      <li>Welcome ladder de 7 dias (sequência de vendas)</li>
+      <li>Atualizações futuras gratuitas</li>
+      <li>Reembolso total em 7 dias — sem perguntas</li>
     </ul>
-    <button class="btn-buy" id="ctaBottom" onclick="buy()" data-cursor><span>Comprar agora — €60</span></button>
-    <div class="small">Pagamento processado pelo Stripe · Cartão · MB Way · Apple Pay</div>
+    <button class="btn btn-primary" onclick="buy()"><span>Comprar agora — €60</span><span class="btn-arrow">→</span></button>
+    <div class="small">Stripe · Cartão · MB Way · Apple Pay</div>
   </div>
 </section>
 
 <footer class="footer">
-  <span class="footer-logo">ItsXli<em style="font-style:italic;color:var(--accent)">Lix</em></span>
-  <a href="mailto:hello@itsxlilix.com" data-cursor>hello@itsxlilix.com</a>
+  <span class="logo"><span class="logo-mark"></span>ItsXli<span>Lix</span></span>
+  <a href="mailto:hello@itsxlilix.com">hello@itsxlilix.com</a>
 </footer>
 
 <script>
 async function buy(){
-  const btns = document.querySelectorAll('.btn-buy, .nav-cta');
-  btns.forEach(b=>{b.disabled=true; b.dataset.orig=b.textContent; b.textContent='A preparar...'});
+  const btns = document.querySelectorAll('.btn-primary, .nav-cta');
+  btns.forEach(b=>{
+    b.disabled = true;
+    if(!b.dataset.orig) b.dataset.orig = b.innerHTML;
+    b.innerHTML = '<span>A preparar...</span>';
+  });
   try{
     const res = await fetch('/.netlify/functions/create-checkout',{method:'POST'});
     const data = await res.json();
     if(data.url){ window.location.href = data.url; }
     else{ throw new Error(data.error || 'Erro ao criar checkout'); }
   }catch(e){
-    alert('Erro: '+e.message+'\nTenta novamente ou contacta hello@itsxlilix.com');
-    btns.forEach(b=>{b.disabled=false; b.textContent=b.dataset.orig});
+    alert('Erro: ' + e.message + '\nTenta novamente ou contacta hello@itsxlilix.com');
+    btns.forEach(b=>{ b.disabled = false; b.innerHTML = b.dataset.orig; });
   }
-}
-
-const cursorDot = document.getElementById('cursorDot');
-if(window.matchMedia('(hover:hover)').matches){
-  let mouseX=0, mouseY=0, dotX=0, dotY=0;
-  document.addEventListener('mousemove', e=>{mouseX=e.clientX; mouseY=e.clientY});
-  function animateCursor(){
-    dotX += (mouseX-dotX)*0.18;
-    dotY += (mouseY-dotY)*0.18;
-    cursorDot.style.left=dotX+'px';
-    cursorDot.style.top=dotY+'px';
-    requestAnimationFrame(animateCursor);
-  }
-  animateCursor();
-  document.querySelectorAll('[data-cursor], .mod-card').forEach(el=>{
-    el.addEventListener('mouseenter',()=>cursorDot.classList.add('hovering'));
-    el.addEventListener('mouseleave',()=>cursorDot.classList.remove('hovering'));
-  });
 }
 
 const io = new IntersectionObserver(es=>{
   es.forEach((e,i)=>{
     if(e.isIntersecting){
-      setTimeout(()=>e.target.classList.add('visible'), i*50);
+      const delay = e.target.classList.contains('mod') ? (i%6)*60 : 0;
+      setTimeout(()=>e.target.classList.add('in'), delay);
       io.unobserve(e.target);
     }
   });
-},{threshold:0.1});
-document.querySelectorAll('.sec, .price-block').forEach(el=>{
-  el.classList.add('fade-in');io.observe(el);
-});
+},{threshold:0.08, rootMargin:'0px 0px -50px 0px'});
 
-const modIo = new IntersectionObserver(es=>{
-  es.forEach((e,i)=>{
-    if(e.isIntersecting){
-      setTimeout(()=>e.target.classList.add('visible'), (i%6)*70);
-      modIo.unobserve(e.target);
-    }
-  });
-},{threshold:0.05});
-document.querySelectorAll('.mod-card').forEach(el=>modIo.observe(el));
+document.querySelectorAll('.sec-head, .price-block, .mod').forEach(el=>{
+  el.classList.add('reveal');
+  io.observe(el);
+});
 </script>
 
 </body>
