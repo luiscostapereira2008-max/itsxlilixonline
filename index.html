@@ -7,318 +7,340 @@
 <meta name="description" content="O manual prático de como construir uma operação real de conteúdo online — Pornhub, Telegram e OnlyFans. Sem promessas vazias.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#ffffff;
-  --bg-2:#ffffff;
-  --ink:#14110b;
-  --ink-2:#4d4538;
-  --muted:#857c6f;
-  --muted-2:#b3aa9b;
-  --line:rgba(20,17,11,0.08);
-  --line-2:rgba(20,17,11,0.16);
-  --surface:#f4f2eb;
-  --surface-2:#e8e4d8;
+  --bg-2:#fafaf8;
+  --ink:#0e0c08;
+  --ink-2:#2a241b;
+  --muted:#7a6f60;
+  --muted-2:#b3a89a;
+  --line:rgba(14,12,8,0.08);
+  --line-2:rgba(14,12,8,0.16);
+  --surface:#f4f0e6;
+  --surface-2:#e8e2d2;
   --accent:#6e1c2e;
   --accent-2:#962d44;
+  --accent-3:#3c0d18;
   --rose:#c4889e;
   --gold:#8a6520;
   --success:#4a7050;
   --r:6px;
-  --r-lg:12px;
+  --r-lg:14px;
   --ease:cubic-bezier(.2,.7,.2,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 body{
-  font-family:'Inter',system-ui,sans-serif;
+  font-family:'Manrope',system-ui,sans-serif;
   background:var(--bg);
   color:var(--ink);
-  line-height:1.65;
+  line-height:1.6;
   font-size:16px;
+  font-weight:400;
+  overflow-x:hidden;
   background-image:
-    radial-gradient(ellipse 70% 50% at 50% -10%, rgba(110,28,46,0.04), transparent 70%),
-    radial-gradient(ellipse 40% 30% at 100% 30%, rgba(196,136,158,0.05), transparent 70%);
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(110,28,46,0.05), transparent 70%),
+    radial-gradient(ellipse 40% 30% at 100% 30%, rgba(196,136,158,0.06), transparent 70%);
   background-attachment:fixed;
 }
 ::selection{background:var(--accent);color:#fff}
 
-/* NAV */
 .nav{
   position:sticky;top:0;z-index:50;
-  background:rgba(255,255,255,0.85);
-  backdrop-filter:blur(16px);
+  background:rgba(255,255,255,0.78);
+  backdrop-filter:blur(18px) saturate(140%);
   border-bottom:1px solid var(--line);
 }
-.nav-in{max-width:1180px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px}
-.logo{font-family:'Fraunces',serif;font-size:19px;font-weight:500;letter-spacing:-0.3px;display:flex;align-items:center;gap:10px}
-.logo b{font-weight:600}
-.logo-mark{width:6px;height:6px;border-radius:50%;background:var(--accent)}
-.nav-cta{
-  padding:9px 18px;background:var(--ink);color:#fff;
-  border:none;border-radius:var(--r);font-family:inherit;font-size:13px;font-weight:500;
-  cursor:pointer;text-decoration:none;letter-spacing:0.3px;
-  transition:all 0.25s var(--ease);
+.nav-in{max-width:1180px;margin:0 auto;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{
+  font-family:'Instrument Serif',serif;
+  font-size:24px;font-weight:400;
+  letter-spacing:-0.5px;
+  display:flex;align-items:center;gap:10px;
 }
-.nav-cta:hover{background:var(--accent)}
+.logo b{font-weight:400}
+.logo em{font-style:italic;color:var(--accent);font-weight:400}
+.logo-mark{
+  width:7px;height:7px;border-radius:50%;background:var(--accent);
+  box-shadow:0 0 0 4px rgba(110,28,46,0.08);
+}
+.nav-cta{
+  padding:10px 20px;background:var(--ink);color:#fff;
+  border:none;border-radius:100px;font-family:inherit;font-size:13px;font-weight:600;
+  cursor:pointer;text-decoration:none;letter-spacing:0.1px;
+  transition:all 0.3s var(--ease);
+  position:relative;overflow:hidden;
+}
+.nav-cta:hover{background:var(--accent);transform:translateY(-1px)}
+.nav-cta:active{transform:translateY(0)}
 
-/* HERO */
-.hero{max-width:1180px;margin:0 auto;padding:120px 32px 100px;text-align:center}
+.hero{
+  max-width:1180px;margin:0 auto;
+  padding:140px 32px 120px;
+  text-align:center;
+  position:relative;
+}
 .hero-eye{
-  display:inline-block;
-  font-family:'Fraunces',serif;
-  font-size:13px;letter-spacing:6px;text-transform:uppercase;
-  color:var(--accent);margin-bottom:32px;font-weight:500;
-  padding:6px 14px;border:1px solid rgba(110,28,46,0.2);border-radius:20px;
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Instrument Serif',serif;
+  font-size:14px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:36px;font-weight:400;font-style:italic;
+}
+.hero-eye::before, .hero-eye::after{
+  content:"";width:24px;height:1px;background:var(--accent);opacity:0.4;
 }
 .hero h1{
-  font-family:'Fraunces',serif;
-  font-size:clamp(48px,8vw,108px);
-  font-weight:400;line-height:0.96;letter-spacing:-3px;
-  margin-bottom:32px;max-width:980px;margin-left:auto;margin-right:auto;
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(56px,9vw,128px);
+  font-weight:400;line-height:0.94;letter-spacing:-3px;
+  margin-bottom:40px;max-width:1080px;margin-left:auto;margin-right:auto;
 }
 .hero h1 em{
-  font-style:italic;font-weight:300;
-  background:linear-gradient(135deg,var(--accent),var(--rose));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  font-style:italic;font-weight:400;
+  color:var(--accent);
+  position:relative;display:inline-block;
+}
+.hero h1 em::after{
+  content:"";position:absolute;bottom:8px;left:0;right:0;height:6px;
+  background:rgba(196,136,158,0.35);
+  z-index:-1;border-radius:3px;
+  transform:scaleX(0.92);transform-origin:left;
+  animation:underline-in 1.2s 0.4s var(--ease) both;
+}
+@keyframes underline-in{
+  from{transform:scaleX(0)}
+  to{transform:scaleX(0.92)}
 }
 .hero p.lead{
   font-size:21px;line-height:1.5;color:var(--ink-2);
-  max-width:640px;margin:0 auto 48px;
+  max-width:620px;margin:0 auto 56px;font-weight:400;
 }
-.cta-row{display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap}
+.cta-row{display:flex;gap:18px;justify-content:center;align-items:center;flex-wrap:wrap}
 .btn-buy{
-  padding:18px 36px;
-  background:linear-gradient(135deg,var(--accent),var(--accent-2));
-  color:#fff;border:none;border-radius:var(--r);
-  font-family:inherit;font-size:15px;font-weight:600;letter-spacing:0.3px;
+  padding:20px 40px;
+  background:var(--ink);
+  color:#fff;border:none;border-radius:100px;
+  font-family:inherit;font-size:15px;font-weight:600;letter-spacing:0.1px;
   cursor:pointer;
-  transition:all 0.25s var(--ease);
-  box-shadow:0 6px 24px rgba(110,28,46,0.15);
+  transition:all 0.35s var(--ease);
+  position:relative;overflow:hidden;
 }
-.btn-buy:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(110,28,46,0.25)}
+.btn-buy::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  opacity:0;transition:opacity 0.35s var(--ease);
+}
+.btn-buy span{position:relative;z-index:1}
+.btn-buy:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(110,28,46,0.25)}
+.btn-buy:hover::before{opacity:1}
+.btn-buy:active{transform:translateY(0)}
 .btn-buy:disabled{opacity:0.6;cursor:wait;transform:none}
-.price-mini{color:var(--muted);font-size:14px;letter-spacing:0.3px}
+.price-mini{color:var(--muted);font-size:14px;letter-spacing:0.2px}
 .price-mini strong{color:var(--ink);font-weight:600}
+.price-mini em{font-style:normal;color:var(--muted)}
 
-/* HERO STACK */
-.stack{
-  margin-top:64px;padding-top:32px;border-top:1px solid var(--line);
-  display:flex;align-items:center;gap:28px;flex-wrap:wrap;justify-content:center;
+.sec{max-width:1180px;margin:0 auto;padding:100px 32px;border-top:1px solid var(--line)}
+.sec-eye{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Instrument Serif',serif;
+  font-size:14px;letter-spacing:1px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:24px;font-weight:400;font-style:italic;
 }
-.stack-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
-.brand{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:var(--ink-2)}
-.brand svg{flex-shrink:0;color:var(--ink-2)}
-
-/* SECTION */
-.sec{max-width:1180px;margin:0 auto;padding:80px 32px;border-top:1px solid var(--line)}
-.sec-eye{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:18px;font-weight:500}
+.sec-eye::before{content:"";width:24px;height:1px;background:var(--accent);opacity:0.5}
 .sec h2{
-  font-family:'Fraunces',serif;
-  font-size:clamp(36px,5vw,56px);font-weight:400;line-height:1.05;
-  letter-spacing:-1.5px;margin-bottom:32px;max-width:760px;
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(40px,6vw,72px);font-weight:400;line-height:1;
+  letter-spacing:-2px;margin-bottom:32px;max-width:820px;
 }
-.sec h2 em{font-style:italic;color:var(--accent);font-weight:300}
-.sec-lead{font-size:18px;color:var(--ink-2);max-width:680px;line-height:1.6;margin-bottom:32px}
+.sec h2 em{font-style:italic;color:var(--accent);font-weight:400}
+.sec-lead{font-size:19px;color:var(--ink-2);max-width:680px;line-height:1.55;margin-bottom:40px}
 
-/* MODULES GRID */
-.mods{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:32px}
+.mods{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:48px}
 @media (max-width:880px){.mods{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:520px){.mods{grid-template-columns:1fr}}
 .mod-card{
-  padding:24px;background:var(--bg-2);border:1px solid var(--line);border-radius:var(--r);
-  transition:all 0.25s var(--ease);
+  padding:28px 24px;background:var(--bg-2);border:1px solid var(--line);
+  border-radius:var(--r-lg);
+  transition:all 0.35s var(--ease);
+  position:relative;overflow:hidden;cursor:default;
 }
-.mod-card:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 8px 24px rgba(110,28,46,0.08)}
-.mod-num{font-family:'Fraunces',serif;font-size:14px;color:var(--accent);margin-bottom:8px;font-weight:500}
-.mod-card h3{font-family:'Fraunces',serif;font-size:20px;font-weight:500;line-height:1.2;margin-bottom:10px;letter-spacing:-0.3px}
-.mod-card p{color:var(--muted);font-size:14px;line-height:1.55}
-
-/* FOR WHOM */
-.for-whom{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:32px}
-@media (max-width:720px){.for-whom{grid-template-columns:1fr}}
-.fw-box{padding:28px;border-radius:var(--r);border:1px solid var(--line)}
-.fw-box.yes{background:rgba(74,112,80,0.04);border-color:rgba(74,112,80,0.2)}
-.fw-box.no{background:rgba(168,58,50,0.04);border-color:rgba(168,58,50,0.2)}
-.fw-tag{font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:12px}
-.fw-box.yes .fw-tag{color:var(--success)}
-.fw-box.no .fw-tag{color:#a83a32}
-.fw-box ul{list-style:none;padding:0;margin:0}
-.fw-box li{padding:8px 0 8px 20px;position:relative;font-size:14px;line-height:1.5;color:var(--ink-2)}
-.fw-box li::before{content:"";position:absolute;left:0;top:15px;width:8px;height:1px;background:currentColor;opacity:0.5}
-
-/* QUOTE / CASE */
-.case-box{
-  margin-top:32px;padding:40px;background:rgba(110,28,46,0.04);
-  border-left:3px solid var(--accent);border-radius:var(--r);
+.mod-card::before{
+  content:"";position:absolute;top:0;left:0;width:0;height:3px;
+  background:linear-gradient(90deg,var(--accent),var(--rose));
+  transition:width 0.5s var(--ease);
 }
-.case-box .lbl{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:14px}
-.case-box .quote{font-family:'Fraunces',serif;font-size:22px;line-height:1.4;font-style:italic;color:var(--ink);max-width:680px}
+.mod-card:hover{
+  transform:translateY(-4px);
+  border-color:rgba(110,28,46,0.3);
+  box-shadow:0 16px 40px rgba(14,12,8,0.06);
+  background:#fff;
+}
+.mod-card:hover::before{width:100%}
+.mod-num{
+  font-family:'Instrument Serif',serif;
+  font-size:36px;color:var(--accent);margin-bottom:14px;font-weight:400;
+  line-height:1;letter-spacing:-1px;
+  opacity:0.85;
+}
+.mod-num em{font-style:italic;color:var(--rose)}
+.mod-card h3{
+  font-family:'Instrument Serif',serif;
+  font-size:24px;font-weight:400;line-height:1.1;margin-bottom:12px;letter-spacing:-0.5px;
+}
+.mod-card p{color:var(--muted);font-size:14px;line-height:1.5;font-weight:400}
 
-/* FAQ */
-.faq{margin-top:24px}
-.faq-item{border-bottom:1px solid var(--line);padding:20px 0;cursor:pointer}
-.faq-item summary{font-family:'Fraunces',serif;font-size:19px;font-weight:500;letter-spacing:-0.2px;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:14px;color:var(--ink)}
-.faq-item summary::-webkit-details-marker{display:none}
-.faq-item summary::after{content:"+";font-family:'Inter';font-size:24px;color:var(--muted);transition:transform 0.25s}
-.faq-item[open] summary::after{transform:rotate(45deg)}
-.faq-item p{padding-top:14px;color:var(--ink-2);line-height:1.6;max-width:680px}
-
-/* PRICE / FINAL CTA */
 .price-block{
-  max-width:560px;margin:80px auto 0;padding:48px;
-  background:linear-gradient(135deg,#14110b,#2a1f15);color:#fff;
-  border-radius:var(--r-lg);text-align:center;position:relative;overflow:hidden;
+  max-width:600px;margin:120px auto 0;padding:64px 48px;
+  background:linear-gradient(135deg,#0e0c08,#2a1c14);color:#fff;
+  border-radius:var(--r-lg);text-align:center;
+  position:relative;overflow:hidden;
 }
-.price-block::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--rose),transparent)}
-.price-block .label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--rose);margin-bottom:18px}
-.price-block .amount{font-family:'Fraunces',serif;font-size:84px;line-height:1;font-weight:400;letter-spacing:-2px;margin-bottom:8px}
-.price-block .amount em{color:var(--rose);font-style:normal;font-weight:300}
-.price-block .sub{color:rgba(255,255,255,0.6);font-size:14px;letter-spacing:0.3px;margin-bottom:32px}
-.price-block ul{list-style:none;padding:0;margin:0 0 32px;text-align:left;display:inline-block}
-.price-block li{padding:8px 0 8px 24px;position:relative;color:rgba(255,255,255,0.85);font-size:14px;line-height:1.5}
-.price-block li::before{content:"✓";position:absolute;left:0;color:var(--rose);font-weight:700}
-.price-block .btn-buy{background:#fff;color:var(--ink);box-shadow:none}
-.price-block .btn-buy:hover{background:var(--rose);color:#fff}
-.price-block .small{margin-top:16px;font-size:12px;color:rgba(255,255,255,0.5)}
+.price-block::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--rose),transparent);
+}
+.price-block::after{
+  content:"";position:absolute;
+  width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,rgba(196,136,158,0.15),transparent 70%);
+  top:-150px;right:-100px;
+  pointer-events:none;
+}
+.price-block .label{
+  font-family:'Instrument Serif',serif;
+  font-size:14px;letter-spacing:2px;text-transform:uppercase;color:var(--rose);
+  margin-bottom:24px;font-style:italic;font-weight:400;
+}
+.price-block .amount{
+  font-family:'Instrument Serif',serif;
+  font-size:120px;line-height:0.95;font-weight:400;letter-spacing:-4px;
+  margin-bottom:12px;
+  position:relative;z-index:1;
+}
+.price-block .amount em{
+  font-style:italic;font-size:0.3em;letter-spacing:0;color:var(--rose);
+  vertical-align:top;margin-left:6px;font-weight:400;
+}
+.price-block .sub{color:rgba(255,255,255,0.55);font-size:14px;letter-spacing:0.2px;margin-bottom:40px;position:relative;z-index:1}
+.price-block ul{list-style:none;padding:0;margin:0 0 40px;text-align:left;display:inline-block;position:relative;z-index:1}
+.price-block li{padding:10px 0 10px 26px;position:relative;color:rgba(255,255,255,0.85);font-size:14px;line-height:1.5}
+.price-block li::before{content:"";position:absolute;left:0;top:18px;width:14px;height:1px;background:var(--rose)}
+.price-block .btn-buy{
+  background:#fff;color:var(--ink);box-shadow:none;
+  font-weight:700;
+  position:relative;z-index:1;
+}
+.price-block .btn-buy::before{background:var(--rose)}
+.price-block .btn-buy:hover{color:var(--ink);box-shadow:0 16px 40px rgba(196,136,158,0.3)}
+.price-block .small{margin-top:20px;font-size:12px;color:rgba(255,255,255,0.4);position:relative;z-index:1}
 
-/* FOOTER */
-.footer{max-width:1180px;margin:0 auto;padding:48px 32px;text-align:center;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
+.footer{
+  max-width:1180px;margin:0 auto;padding:60px 32px;
+  text-align:center;color:var(--muted);font-size:13px;
+  border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;
+}
+.footer a{color:var(--muted);text-decoration:none;transition:color 0.2s}
+.footer a:hover{color:var(--accent)}
+.footer-logo{font-family:'Instrument Serif',serif;font-size:18px;color:var(--ink)}
 
 @media (max-width:720px){
-  .hero{padding:80px 20px 60px}
-  .sec{padding:60px 20px}
-  .price-block{padding:36px 24px;margin:60px 20px 0}
-  .nav-in{padding:12px 20px}
+  .hero{padding:90px 20px 70px}
+  .sec{padding:70px 20px}
+  .price-block{padding:48px 28px;margin:80px 20px 0}
+  .nav-in{padding:14px 20px}
 }
 
-/* fade in */
-.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.8s var(--ease),transform 0.8s var(--ease)}
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.9s var(--ease),transform 0.9s var(--ease)}
 .fade-in.visible{opacity:1;transform:translateY(0)}
+
+.mod-card{opacity:0;transform:translateY(20px);transition:opacity 0.7s var(--ease),transform 0.7s var(--ease),background 0.35s,border-color 0.35s,box-shadow 0.35s}
+.mod-card.visible{opacity:1;transform:translateY(0)}
+
+.cursor-dot{
+  position:fixed;width:8px;height:8px;border-radius:50%;
+  background:var(--accent);pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:width 0.25s var(--ease),height 0.25s var(--ease),opacity 0.3s;
+  mix-blend-mode:multiply;opacity:0;
+}
+@media (hover:hover) and (pointer:fine){
+  .cursor-dot{opacity:0.6}
+}
+.cursor-dot.hovering{width:36px;height:36px;background:rgba(110,28,46,0.15)}
 </style>
 </head>
 <body>
 
+<div class="cursor-dot" id="cursorDot"></div>
+
 <nav class="nav">
   <div class="nav-in">
-    <div class="logo"><span class="logo-mark"></span><b>ItsXliLix</b></div>
-    <button class="nav-cta" onclick="buy()">Comprar — €60</button>
+    <div class="logo"><span class="logo-mark"></span><b>ItsXli</b><em>Lix</em></div>
+    <button class="nav-cta" onclick="buy()" data-cursor>Comprar — €60</button>
   </div>
 </nav>
 
-<!-- HERO -->
 <header class="hero">
-  <div class="hero-eye">ItsXliLix · Manual</div>
+  <div class="hero-eye">Manual prático</div>
   <h1>Constrói o teu <em>income</em><br>online.</h1>
   <p class="lead">O manual prático de como construir uma operação real de conteúdo online — sem promessas vazias, sem fórmulas mágicas. Escrito por quem já o faz.</p>
   <div class="cta-row">
-    <button class="btn-buy" id="ctaTop" onclick="buy()">Comprar acesso — €60</button>
-    <span class="price-mini">Acesso <strong>vitalício</strong> · sem mensalidades · <em style="font-style:normal;color:var(--muted)">€60 + IVA</em></span>
+    <button class="btn-buy" id="ctaTop" onclick="buy()" data-cursor><span>Comprar acesso — €60</span></button>
+    <span class="price-mini">Acesso <strong>vitalício</strong> · sem mensalidades · <em>€60 + IVA</em></span>
   </div>
 </header>
 
-<!-- WHAT YOU LEARN -->
 <section class="sec">
   <div class="sec-eye">O que vais aprender</div>
-  <h2>12 módulos. Zero <em>fluff</em>.</h2>
+  <h2>12 módulos. <em>Sem tretas.</em></h2>
   <p class="sec-lead">Cada módulo tem um quizz, frameworks práticos e o "Princípio universal" que mostra como o que aprendes se aplica a qualquer negócio digital — não só conteúdo adulto.</p>
 
   <div class="mods">
-    <div class="mod-card"><div class="mod-num">01</div><h3>A realidade do mercado</h3><p>As verdades que ninguém te diz sobre os primeiros 90 dias.</p></div>
-    <div class="mod-card"><div class="mod-num">02</div><h3>Os 5 níveis de exposição</h3><p>Por que não tens de mostrar tudo para ganhar bem.</p></div>
-    <div class="mod-card"><div class="mod-num">03</div><h3>Limites &amp; mentalidade</h3><p>Os 4 limites que tens de definir antes de começar.</p></div>
-    <div class="mod-card"><div class="mod-num">04</div><h3>Persona &amp; posicionamento</h3><p>Como construir uma identidade que vende sozinha.</p></div>
-    <div class="mod-card"><div class="mod-num">05</div><h3>A arquitetura do funil</h3><p>Tráfego → comunidade → conversão. Decomposta.</p></div>
-    <div class="mod-card"><div class="mod-num">06</div><h3>Organizar o OnlyFans</h3><p>7 decisões + welcome ladder + templates. O módulo mais prático.</p></div>
-    <div class="mod-card"><div class="mod-num">07</div><h3>Psicologia &amp; vendas</h3><p>Os 4 motores da decisão de pagar.</p></div>
-    <div class="mod-card"><div class="mod-num">08</div><h3>Tráfego: motores reais</h3><p>Pornhub, X, Reddit, Instagram, TikTok — como dominar cada um.</p></div>
-    <div class="mod-card"><div class="mod-num">09</div><h3>Telegram &amp; comunidade</h3><p>Bots, cross-promo, semana-tipo real.</p></div>
-    <div class="mod-card"><div class="mod-num">10</div><h3>Conteúdo que converte</h3><p>Função &gt; volume. Calendário simples.</p></div>
-    <div class="mod-card"><div class="mod-num">11</div><h3>Demonstrar expertise</h3><p>A técnica multiplicadora que ninguém usa.</p></div>
-    <div class="mod-card"><div class="mod-num">12</div><h3>Saída &amp; diversificação</h3><p>A regra dos 3 anos. Onde colocar o dinheiro.</p></div>
+    <div class="mod-card"><div class="mod-num">0<em>1</em></div><h3>A realidade do mercado</h3><p>As verdades que ninguém te diz sobre os primeiros 90 dias.</p></div>
+    <div class="mod-card"><div class="mod-num">0<em>2</em></div><h3>Os 5 níveis de exposição</h3><p>Por que não tens de mostrar tudo para ganhar bem.</p></div>
+    <div class="mod-card"><div class="mod-num">0<em>3</em></div><h3>Limites &amp; mentalidade</h3><p>Os 4 limites que tens de definir antes de começar.</p></div>
+    <div class="mod-card"><div class="mod-num">0<em>4</em></div><h3>Persona &amp; posicionamento</h3><p>Como construir uma identidade que vende sozinha.</p></div>
+    <div class="mod-card"><div class="mod-num">0<em>5</em></div><h3>A arquitetura do funil</h3><p>Tráfego → comunidade → conversão. Decomposta.</p></div>
+    <div class="mod-card"><div class="mod-num">0<em>6</em></div><h3>Organizar o OnlyFans</h3><p>7 decisões + welcome ladder + templates. O módulo mais prático.</p></div>
+    <div class="mod-card"><div class="mod-num">0<em>7</em></div><h3>Psicologia &amp; vendas</h3><p>Os 4 motores da decisão de pagar.</p></div>
+    <div class="mod-card"><div class="mod-num">0<em>8</em></div><h3>Tráfego: motores reais</h3><p>Pornhub, X, Reddit, Instagram, TikTok — como dominar cada um.</p></div>
+    <div class="mod-card"><div class="mod-num">0<em>9</em></div><h3>Telegram &amp; comunidade</h3><p>Bots, cross-promo, semana-tipo real.</p></div>
+    <div class="mod-card"><div class="mod-num">1<em>0</em></div><h3>Conteúdo que converte</h3><p>Função &gt; volume. Calendário simples.</p></div>
+    <div class="mod-card"><div class="mod-num">1<em>1</em></div><h3>Demonstrar expertise</h3><p>A técnica multiplicadora que ninguém usa.</p></div>
+    <div class="mod-card"><div class="mod-num">1<em>2</em></div><h3>Saída &amp; diversificação</h3><p>A regra dos 3 anos. Onde colocar o dinheiro.</p></div>
   </div>
 </section>
 
-<!-- FOR WHOM -->
-<section class="sec">
-  <div class="sec-eye">Para quem é</div>
-  <h2>Este manual é <em>para ti</em> — ou não.</h2>
-  <div class="for-whom">
-    <div class="fw-box yes">
-      <div class="fw-tag">Sim, se...</div>
-      <ul>
-        <li>Queres construir um negócio online sustentável (com ou sem conteúdo adulto)</li>
-        <li>Procuras estrutura, não motivação — frameworks que funcionam</li>
-        <li>Já estás a criar e queres escalar / maximizar ticket médio</li>
-        <li>Queres skills de marketing digital que servem para qualquer indústria</li>
-        <li>Preferes verdade desconfortável a promessas bonitas</li>
-      </ul>
-    </div>
-    <div class="fw-box no">
-      <div class="fw-tag">Não, se...</div>
-      <ul>
-        <li>Esperas ganhar €10k no primeiro mês</li>
-        <li>Procuras "fórmula mágica" ou copy-paste de quem já está estabelecido</li>
-        <li>Não estás disponível a publicar com consistência durante 6+ meses</li>
-        <li>Queres atalhos para fama em vez de sistemas para receita</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- CASE -->
-<section class="sec">
-  <div class="sec-eye">Quem escreveu</div>
-  <h2>Não é um <em>guru</em>. É de dentro do mercado.</h2>
-  <p class="sec-lead">Este manual foi escrito por mim, ItsXliLix. Construí uma das operações mais consistentes do mercado lusófono adulto com uma arquitetura específica: Pornhub para tráfego massivo, Telegram para comunidade próxima, OnlyFans como caixa registadora central. Tudo o que está no manual é o que faço — ou já fiz, ou já vi falhar.</p>
-  <div class="case-box">
-    <div class="lbl">O ângulo</div>
-    <div class="quote">"O nível de exposição que escolho é decisão minha. Mas a arquitetura — tráfego → comunidade → conversão — funciona em qualquer nível, qualquer nicho, qualquer negócio digital. É isso que partilho neste manual."</div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section class="sec">
-  <div class="sec-eye">Perguntas frequentes</div>
-  <h2>O que ainda <em>queres saber</em>.</h2>
-  <div class="faq">
-    <details class="faq-item"><summary>Recebo acesso imediato?</summary><p>Sim. Depois de pagares com cartão, recebes em segundos um email com o teu link de acesso único e pessoal. O acesso é vitalício.</p></details>
-    <details class="faq-item"><summary>Posso ver no telemóvel?</summary><p>Sim, o curso é completamente responsivo. Mantém o link guardado nos favoritos.</p></details>
-    <details class="faq-item"><summary>É só para quem quer fazer conteúdo adulto?</summary><p>Não. Cada módulo tem um "Princípio universal" que mostra como o conceito se aplica a qualquer negócio online — SaaS, e-commerce, coaching, freelance. O conteúdo adulto é o exemplo concreto, não o tema.</p></details>
-    <details class="faq-item"><summary>Tem certificado?</summary><p>Não. Isto é um manual prático de execução, não um curso académico. Pagas pelo conhecimento, não pelo papel.</p></details>
-    <details class="faq-item"><summary>Posso pedir reembolso?</summary><p>Tens 7 dias após a compra para pedir reembolso total se não fizer sentido para ti. Basta responder ao email de boas-vindas.</p></details>
-    <details class="faq-item"><summary>O preço vai subir?</summary><p>Sim. €60 é o preço de lançamento. À medida que mais módulos forem adicionados, o preço sobe.</p></details>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section style="padding:0 32px 80px">
+<section style="padding:0 32px 100px">
   <div class="price-block">
     <div class="label">Acesso vitalício</div>
-    <div class="amount">€60<em style="font-size:24px;letter-spacing:0">+IVA</em></div>
+    <div class="amount">€60<em>+IVA</em></div>
     <div class="sub">pagamento único de €73,80 (com IVA 23%) · sem mensalidades</div>
     <ul>
       <li>12 módulos · ~150 páginas</li>
       <li>Quizzes interativos</li>
-      <li>Templates de welcome message, mass message, semana-tipo</li>
+      <li>Templates: welcome message, mass message, semana-tipo</li>
       <li>Welcome ladder de 7 dias</li>
-      <li>Acesso vitalício — incluindo atualizações futuras</li>
+      <li>Acesso vitalício — incluindo atualizações</li>
       <li>7 dias para reembolso total</li>
     </ul>
-    <button class="btn-buy" id="ctaBottom" onclick="buy()">Comprar agora — €60</button>
+    <button class="btn-buy" id="ctaBottom" onclick="buy()" data-cursor><span>Comprar agora — €60</span></button>
     <div class="small">Pagamento processado pelo Stripe · Cartão · MB Way · Apple Pay</div>
   </div>
 </section>
 
 <footer class="footer">
-  © ItsXliLix · <a href="mailto:hello@itsxlilix.com" style="color:var(--muted)">hello@itsxlilix.com</a>
+  <span class="footer-logo">ItsXli<em style="font-style:italic;color:var(--accent)">Lix</em></span>
+  <a href="mailto:hello@itsxlilix.com" data-cursor>hello@itsxlilix.com</a>
 </footer>
 
 <script>
 async function buy(){
   const btns = document.querySelectorAll('.btn-buy, .nav-cta');
-  btns.forEach(b=>{b.disabled=true; b.textContent='A preparar...'});
+  btns.forEach(b=>{b.disabled=true; b.dataset.orig=b.textContent; b.textContent='A preparar...'});
   try{
     const res = await fetch('/.netlify/functions/create-checkout',{method:'POST'});
     const data = await res.json();
@@ -326,17 +348,49 @@ async function buy(){
     else{ throw new Error(data.error || 'Erro ao criar checkout'); }
   }catch(e){
     alert('Erro: '+e.message+'\nTenta novamente ou contacta hello@itsxlilix.com');
-    btns.forEach(b=>{b.disabled=false; b.textContent=b.classList.contains('nav-cta')?'Comprar — €60':'Comprar acesso — €60'});
+    btns.forEach(b=>{b.disabled=false; b.textContent=b.dataset.orig});
   }
 }
 
-// fade in
+const cursorDot = document.getElementById('cursorDot');
+if(window.matchMedia('(hover:hover)').matches){
+  let mouseX=0, mouseY=0, dotX=0, dotY=0;
+  document.addEventListener('mousemove', e=>{mouseX=e.clientX; mouseY=e.clientY});
+  function animateCursor(){
+    dotX += (mouseX-dotX)*0.18;
+    dotY += (mouseY-dotY)*0.18;
+    cursorDot.style.left=dotX+'px';
+    cursorDot.style.top=dotY+'px';
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+  document.querySelectorAll('[data-cursor], .mod-card').forEach(el=>{
+    el.addEventListener('mouseenter',()=>cursorDot.classList.add('hovering'));
+    el.addEventListener('mouseleave',()=>cursorDot.classList.remove('hovering'));
+  });
+}
+
 const io = new IntersectionObserver(es=>{
-  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}});
+  es.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('visible'), i*50);
+      io.unobserve(e.target);
+    }
+  });
 },{threshold:0.1});
-document.querySelectorAll('.sec, .mod-card, .case-box, .fw-box, .price-block').forEach(el=>{
+document.querySelectorAll('.sec, .price-block').forEach(el=>{
   el.classList.add('fade-in');io.observe(el);
 });
+
+const modIo = new IntersectionObserver(es=>{
+  es.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('visible'), (i%6)*70);
+      modIo.unobserve(e.target);
+    }
+  });
+},{threshold:0.05});
+document.querySelectorAll('.mod-card').forEach(el=>modIo.observe(el));
 </script>
 
 </body>
