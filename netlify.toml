@@ -1,0 +1,30 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+# raw body necessário para validar assinatura do webhook do Stripe
+[functions."stripe-webhook"]
+  included_files = []
+
+# redirects amigáveis
+[[redirects]]
+  from = "/curso"
+  to = "/Income Onli.html"
+  status = 200
+
+[[redirects]]
+  from = "/sucesso"
+  to = "/sucesso.html"
+  status = 200
+
+# headers de segurança
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), camera=(), microphone=()"

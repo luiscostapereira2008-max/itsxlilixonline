@@ -1,0 +1,2035 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ItsXliLix — Constrói o teu income online</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* base — white minimal */
+  --bg:#ffffff;
+  --bg-2:#ffffff;
+  --ink:#14110b;
+  --ink-2:#4d4538;
+  --muted:#857c6f;
+  --muted-2:#b3aa9b;
+  --line:rgba(20,17,11,0.08);
+  --line-2:rgba(20,17,11,0.16);
+  --surface:#f5f3ed;
+  --surface-2:#ebe7dc;
+  /* accent principal — wine deep (ItsXliLix) */
+  --accent:#6e1c2e;
+  --accent-2:#962d44;
+  --accent-soft:rgba(110,28,46,0.06);
+  --rose:#c4889e;
+  --rose-soft:rgba(196,136,158,0.1);
+  /* gold subtil para "Princípio universal" */
+  --gold:#8a6520;
+  --gold-soft:rgba(138,101,32,0.07);
+  --success:#4a7050;
+  --error:#a83a32;
+  --r:6px;
+  --r-lg:12px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.65;
+  font-size:16px;
+  font-weight:400;
+  background-image:
+    radial-gradient(ellipse 70% 50% at 50% -10%, rgba(110,28,46,0.04), transparent 70%),
+    radial-gradient(ellipse 40% 30% at 100% 30%, rgba(196,136,158,0.05), transparent 70%);
+  background-attachment:fixed;
+}
+::selection{background:var(--accent);color:#ffffff}
+
+/* =========== TOPBAR =========== */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,0.88);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.topbar-in{
+  max-width:1280px;margin:0 auto;
+  padding:14px 32px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+}
+.logo{
+  font-family:'Fraunces',serif;
+  font-size:19px;font-weight:500;
+  letter-spacing:-0.3px;
+  display:flex;align-items:center;gap:10px;
+}
+.logo b{font-weight:600}
+.logo em{font-style:italic;font-weight:400;color:var(--accent)}
+.logo-mark{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--accent);
+}
+.prog{
+  display:flex;align-items:center;gap:14px;
+  font-size:12px;color:var(--muted);
+  letter-spacing:0.3px;
+}
+.prog-bar{
+  width:120px;height:2px;background:var(--line-2);border-radius:1px;overflow:hidden;
+}
+.prog-fill{
+  height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));width:0%;
+  transition:width 0.6s var(--ease);
+}
+.reset-btn{
+  background:none;border:none;color:var(--muted-2);font-size:11px;
+  cursor:pointer;text-decoration:underline;font-family:inherit;
+}
+.reset-btn:hover{color:var(--ink-2)}
+
+/* =========== HERO =========== */
+.hero{
+  max-width:1280px;margin:0 auto;
+  padding:100px 32px 80px;
+  border-bottom:1px solid var(--line);
+}
+.hero-eyebrow{
+  font-family:'Fraunces',serif;
+  font-size:14px;letter-spacing:6px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:32px;font-weight:500;
+}
+.hero h1{
+  font-family:'Fraunces',serif;
+  font-size:clamp(48px,7.5vw,96px);
+  font-weight:400;
+  line-height:0.98;
+  letter-spacing:-2.5px;
+  margin-bottom:32px;
+  max-width:980px;
+}
+.hero h1 em{
+  font-style:italic;font-weight:300;
+  background:linear-gradient(135deg,var(--accent),var(--rose));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero-lead{
+  font-size:19px;line-height:1.55;
+  color:var(--ink-2);
+  max-width:640px;
+  margin-bottom:48px;
+}
+.hero-stack{
+  display:flex;align-items:center;gap:28px;
+  flex-wrap:wrap;
+  padding-top:32px;
+  border-top:1px solid var(--line);
+}
+.hero-stack-label{
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);
+}
+.brand{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:13px;font-weight:500;color:var(--ink-2);
+}
+.brand svg{flex-shrink:0;color:var(--ink-2)}
+
+/* =========== LAYOUT =========== */
+.shell{
+  max-width:1280px;margin:0 auto;
+  padding:48px 32px 120px;
+  display:grid;
+  grid-template-columns:240px 1fr;
+  gap:80px;
+}
+@media (max-width:960px){
+  .shell{grid-template-columns:1fr;gap:32px;padding:32px 20px 80px}
+  .hero{padding:64px 20px 48px}
+  .topbar-in{padding:12px 20px}
+  .sidebar{position:static !important;max-height:none !important}
+}
+
+/* =========== SIDEBAR =========== */
+.sidebar{
+  position:sticky;top:80px;height:fit-content;
+  max-height:calc(100vh - 100px);overflow-y:auto;
+  padding-right:8px;
+}
+.sidebar::-webkit-scrollbar{width:3px}
+.sidebar::-webkit-scrollbar-track{background:transparent}
+.sidebar::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:2px}
+.side-label{
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);margin-bottom:18px;font-weight:500;
+}
+.side-list{list-style:none}
+.side-item{
+  padding:10px 0;
+  cursor:pointer;
+  color:var(--muted);
+  font-size:14px;
+  display:flex;align-items:baseline;gap:14px;
+  transition:color 0.25s var(--ease);
+  border-bottom:1px solid var(--line);
+  line-height:1.4;
+}
+.side-item:hover{color:var(--ink-2)}
+.side-item.active{color:var(--ink);font-weight:500}
+.side-num{
+  font-family:'Fraunces',serif;
+  font-size:13px;font-weight:500;
+  color:var(--muted);
+  flex-shrink:0;
+  width:24px;
+  font-variant-numeric:tabular-nums;
+  transition:color 0.25s var(--ease);
+}
+.side-item.active .side-num{color:var(--accent)}
+.side-item.done .side-num{color:var(--success)}
+.side-item.done .side-num::before{content:"✓ ";font-family:'Inter',sans-serif;font-size:11px}
+.side-item.done .side-num-text{display:none}
+
+/* =========== MAIN =========== */
+.main{min-width:0}
+.module{display:none}
+.module.active{display:block;animation:fade 0.6s var(--ease)}
+@keyframes fade{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.mod-head{
+  margin-bottom:56px;padding-bottom:32px;
+  border-bottom:1px solid var(--line);
+}
+.mod-eyebrow{
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:16px;font-weight:500;
+}
+.mod-title{
+  font-family:'Fraunces',serif;
+  font-size:clamp(40px,5vw,68px);
+  font-weight:400;line-height:1.02;
+  letter-spacing:-1.5px;
+  margin-bottom:20px;
+}
+.mod-title em{font-style:italic;font-weight:300;color:var(--accent)}
+.mod-intro{
+  font-size:18px;color:var(--ink-2);max-width:660px;
+  line-height:1.55;
+}
+
+.sec{margin-bottom:64px;position:relative}
+.sec h3{
+  font-family:'Fraunces',serif;
+  font-size:30px;font-weight:500;
+  margin-bottom:20px;
+  letter-spacing:-0.4px;
+  line-height:1.15;
+  color:var(--ink);
+  display:flex;align-items:baseline;gap:14px;
+}
+.sec h3::before{
+  content:"";display:inline-block;
+  width:18px;height:1px;background:var(--accent);
+  flex-shrink:0;transform:translateY(-7px);
+}
+.sec h3 em{font-style:italic;font-weight:400;color:var(--accent)}
+.sec h4{
+  font-size:13px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--accent);font-weight:600;
+  margin:32px 0 14px;
+  padding-bottom:8px;border-bottom:1px solid var(--line);
+}
+.sec p{margin-bottom:14px;color:var(--ink-2);max-width:680px;line-height:1.7}
+.sec p strong{font-weight:600;color:var(--ink)}
+.sec p em{color:var(--accent);font-style:normal;font-weight:500}
+
+/* =========== CALLOUTS =========== */
+.callout{
+  margin:28px 0;
+  padding:24px 28px;
+  border-radius:var(--r);
+  position:relative;
+  background:var(--surface);
+  border:1px solid var(--line);
+}
+.callout-label{
+  font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
+  font-weight:600;
+  margin-bottom:10px;
+  display:flex;align-items:center;gap:8px;
+}
+.callout-label::before{
+  content:"";width:14px;height:1px;background:currentColor;
+}
+.callout p{margin:0;font-size:15px;line-height:1.65;color:var(--ink-2)}
+.callout p+p{margin-top:8px}
+.callout strong{color:var(--ink);font-weight:600}
+
+.callout.universal{
+  background:linear-gradient(135deg,rgba(154,117,54,0.06),rgba(154,117,54,0.02));
+  border-color:rgba(154,117,54,0.22);
+  border-left:3px solid var(--gold);
+}
+.callout.universal .callout-label{color:var(--gold)}
+
+.callout.case{
+  background:linear-gradient(135deg,rgba(110,28,46,0.06),rgba(110,28,46,0.02));
+  border-color:rgba(110,28,46,0.2);
+  border-left:3px solid var(--accent);
+}
+.callout.case .callout-label{color:var(--accent);font-size:11px;letter-spacing:3px}
+.callout.case .callout-label::before{background:var(--accent)}
+
+.callout.warn{
+  background:rgba(168,58,50,0.05);
+  border-color:rgba(168,58,50,0.2);
+}
+.callout.warn .callout-label{color:var(--error)}
+
+.callout.tip{
+  background:rgba(74,112,80,0.05);
+  border-color:rgba(74,112,80,0.22);
+}
+.callout.tip .callout-label{color:var(--success)}
+
+/* =========== QUOTE =========== */
+.quote{
+  margin:36px 0;padding:8px 0 8px 28px;
+  border-left:2px solid var(--accent);
+  font-family:'Fraunces',serif;
+  font-size:23px;font-weight:400;font-style:italic;
+  line-height:1.35;
+  color:var(--ink);
+  max-width:640px;
+}
+
+/* =========== PYRAMID =========== */
+.pyramid{margin:32px 0;display:flex;flex-direction:column;gap:6px}
+.pyramid-row{
+  display:grid;
+  grid-template-columns:60px 1fr auto;
+  gap:24px;align-items:flex-start;
+  padding:18px 0;
+  border-bottom:1px solid var(--line);
+  transition:padding 0.25s var(--ease);
+}
+.pyramid-row:hover{padding-left:8px}
+.pyramid-num{
+  font-family:'Fraunces',serif;
+  font-size:36px;font-weight:400;
+  color:var(--accent);line-height:1;
+}
+.pyramid-name{font-weight:600;font-size:16px;margin-bottom:4px;color:var(--ink)}
+.pyramid-desc{color:var(--muted);font-size:14px;line-height:1.55}
+.pyramid-tag{
+  font-size:10px;letter-spacing:1.5px;text-transform:uppercase;
+  padding:5px 12px;border-radius:20px;
+  background:var(--surface);color:var(--muted);
+  white-space:nowrap;font-weight:600;
+  align-self:center;
+  border:1px solid var(--line);
+}
+.pyramid-row[data-r="1"] .pyramid-tag{background:rgba(74,112,80,0.08);color:var(--success);border-color:rgba(74,112,80,0.2)}
+.pyramid-row[data-r="2"] .pyramid-tag{background:rgba(154,117,54,0.08);color:var(--gold);border-color:rgba(154,117,54,0.2)}
+.pyramid-row[data-r="3"] .pyramid-tag{background:rgba(154,117,54,0.14);color:var(--gold);border-color:rgba(154,117,54,0.3)}
+.pyramid-row[data-r="4"] .pyramid-tag{background:rgba(196,136,158,0.15);color:#9a3a52;border-color:rgba(196,136,158,0.35)}
+.pyramid-row[data-r="5"] .pyramid-tag{background:rgba(110,28,46,0.1);color:var(--accent);border-color:rgba(110,28,46,0.25)}
+
+/* =========== LISTS =========== */
+.list{margin:14px 0;list-style:none}
+.list li{
+  padding:10px 0 10px 20px;
+  position:relative;
+  border-bottom:1px solid var(--line);
+  color:var(--ink-2);line-height:1.65;
+}
+.list li:last-child{border-bottom:none}
+.list li::before{
+  content:"";position:absolute;left:0;top:20px;
+  width:8px;height:1px;background:var(--accent);
+}
+.list li strong{font-weight:600;color:var(--ink)}
+.list.compact li{padding:6px 0 6px 20px;border-bottom:none}
+.list.compact li::before{top:16px}
+
+/* =========== FUNNEL DIAGRAM =========== */
+.funnel{
+  margin:32px 0;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:0;
+  border:1px solid var(--line);
+  border-radius:var(--r-lg);
+  overflow:hidden;
+  background:var(--bg-2);
+}
+@media (max-width:680px){.funnel{grid-template-columns:1fr}}
+.funnel-step{
+  padding:24px;
+  border-right:1px solid var(--line);
+  position:relative;
+  transition:background 0.25s var(--ease);
+}
+.funnel-step:hover{background:var(--surface-2)}
+.funnel-step:last-child{border-right:none}
+@media (max-width:680px){
+  .funnel-step{border-right:none;border-bottom:1px solid var(--line)}
+  .funnel-step:last-child{border-bottom:none}
+}
+.funnel-step::before{
+  content:attr(data-step);
+  position:absolute;top:18px;right:20px;
+  font-family:'Fraunces',serif;
+  font-size:36px;color:var(--line-2);font-weight:400;line-height:1;
+}
+.funnel-platforms{
+  display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;
+}
+.funnel-step h4{
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--accent);font-weight:600;margin-bottom:8px;
+}
+.funnel-step h5{
+  font-family:'Fraunces',serif;
+  font-size:22px;font-weight:500;line-height:1.1;margin-bottom:10px;color:var(--ink);
+}
+.funnel-step p{font-size:14px;color:var(--muted);line-height:1.55;margin:0}
+
+/* =========== TABLE =========== */
+.tbl{
+  margin:24px 0;
+  border:1px solid var(--line);
+  border-radius:var(--r);
+  overflow:hidden;
+  background:var(--bg-2);
+}
+.tbl-row{
+  display:grid;
+  grid-template-columns:200px 1fr;
+  border-bottom:1px solid var(--line);
+}
+.tbl-row:last-child{border-bottom:none}
+.tbl-row.header{
+  background:var(--surface-2);
+  font-size:11px;text-transform:uppercase;letter-spacing:1.5px;
+  font-weight:600;color:var(--muted);
+}
+.tbl-cell{padding:14px 18px;border-right:1px solid var(--line);font-size:14px;line-height:1.55;color:var(--ink-2)}
+.tbl-cell:last-child{border-right:none}
+.tbl-cell strong{font-weight:600;color:var(--ink)}
+@media (max-width:600px){.tbl-row{grid-template-columns:1fr 1fr}}
+
+/* =========== TEMPLATE BLOCK =========== */
+.template{
+  margin:24px 0;
+  background:linear-gradient(135deg,rgba(154,117,54,0.05),rgba(154,117,54,0.01));
+  border:1px solid rgba(154,117,54,0.2);
+  border-left:3px solid var(--gold);
+  border-radius:var(--r);
+  padding:20px 24px;
+}
+.template-label{
+  font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--gold);font-weight:600;margin-bottom:10px;
+}
+.template-body{
+  font-family:'Inter',sans-serif;
+  font-size:14px;color:var(--ink);
+  line-height:1.7;
+  white-space:pre-wrap;
+  background:var(--bg-2);
+  padding:14px 16px;
+  border-radius:var(--r);
+  border:1px solid var(--line);
+}
+
+/* =========== QUIZ =========== */
+.quiz{
+  margin:80px 0 0;padding:40px;
+  background:var(--bg-2);
+  border:1px solid var(--line);
+  border-radius:var(--r-lg);
+  box-shadow:0 1px 0 rgba(26,20,16,0.02);
+}
+.quiz-head{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:32px;
+  padding-bottom:24px;border-bottom:1px solid var(--line);
+}
+.quiz-label{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);margin-bottom:6px;font-weight:500}
+.quiz-title{font-family:'Fraunces',serif;font-size:28px;font-weight:500;letter-spacing:-0.3px}
+.quiz-prog{color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums}
+
+.question{display:none;animation:fade 0.4s var(--ease)}
+.question.active{display:block}
+.q-text{
+  font-size:20px;line-height:1.45;margin-bottom:28px;
+  font-weight:500;font-family:'Fraunces',serif;
+  letter-spacing:-0.2px;color:var(--ink);
+}
+.opts{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
+.opt{
+  padding:14px 18px;
+  background:var(--bg);
+  border:1px solid var(--line);
+  border-radius:var(--r);
+  cursor:pointer;
+  transition:all 0.25s var(--ease);
+  color:var(--ink);
+  font-family:inherit;font-size:15px;
+  text-align:left;
+  display:flex;align-items:center;gap:14px;
+  width:100%;
+}
+.opt:hover:not(.locked){
+  border-color:var(--accent);
+  transform:translateX(2px);
+  background:var(--bg-2);
+}
+.opt-letter{
+  display:flex;align-items:center;justify-content:center;
+  width:26px;height:26px;border-radius:50%;
+  background:var(--surface);border:1px solid var(--line);
+  font-size:12px;font-weight:600;color:var(--muted);
+  flex-shrink:0;
+  transition:all 0.25s var(--ease);
+  font-family:'Inter',sans-serif;
+}
+.opt:hover:not(.locked) .opt-letter{
+  background:var(--accent);color:#ffffff;border-color:var(--accent);
+}
+.opt.correct{
+  background:rgba(74,112,80,0.08);
+  border-color:var(--success);
+}
+.opt.correct .opt-letter{background:var(--success);color:#ffffff;border-color:var(--success)}
+.opt.wrong{
+  background:rgba(168,58,50,0.06);
+  border-color:var(--error);
+}
+.opt.wrong .opt-letter{background:var(--error);color:#ffffff;border-color:var(--error)}
+.opt.locked{cursor:default}
+.opt.dimmed{opacity:0.4}
+
+.feedback{
+  display:none;padding:16px 18px;border-radius:var(--r);
+  margin-bottom:20px;font-size:14px;line-height:1.55;
+  animation:fade 0.3s var(--ease);
+  color:var(--ink-2);
+}
+.feedback.show{display:block}
+.feedback.correct{background:rgba(74,112,80,0.05);border:1px solid rgba(74,112,80,0.25)}
+.feedback.wrong{background:rgba(168,58,50,0.05);border:1px solid rgba(168,58,50,0.25)}
+.feedback b{display:block;margin-bottom:4px;font-weight:600}
+.feedback.correct b{color:var(--success)}
+.feedback.wrong b{color:var(--error)}
+
+.q-nav{display:flex;justify-content:flex-end;gap:12px}
+
+.btn{
+  padding:11px 22px;
+  background:var(--bg-2);
+  border:1px solid var(--line-2);
+  color:var(--ink);font-family:inherit;
+  font-size:13px;font-weight:500;letter-spacing:0.5px;
+  border-radius:var(--r);
+  cursor:pointer;transition:all 0.25s var(--ease);
+}
+.btn:hover{border-color:var(--accent);transform:translateY(-1px);color:var(--accent)}
+.btn:disabled{opacity:0.4;cursor:not-allowed;transform:none}
+.btn.primary{
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  color:#ffffff;border-color:transparent;
+  font-weight:600;
+}
+.btn.primary:hover{
+  filter:brightness(1.08);
+  box-shadow:0 8px 24px rgba(110,28,46,0.2);
+  color:#ffffff;
+}
+
+.results{display:none;text-align:center;padding:16px 0}
+.results.show{display:block;animation:fade 0.4s var(--ease)}
+.score-num{
+  font-family:'Fraunces',serif;
+  font-size:78px;font-weight:400;line-height:1;
+  letter-spacing:-2px;
+  background:linear-gradient(135deg,var(--accent),var(--rose));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.score-num em{font-style:normal;font-weight:300;opacity:0.7}
+.score-lbl{color:var(--muted);font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-top:8px}
+.score-msg{margin:20px auto 24px;max-width:460px;color:var(--ink-2);font-size:15px;line-height:1.55}
+
+/* =========== MODULE NAV =========== */
+.mod-nav{
+  display:flex;justify-content:space-between;gap:14px;
+  margin-top:48px;padding-top:32px;
+  border-top:1px solid var(--line);
+}
+.nav-btn{
+  flex:1;padding:18px 22px;
+  background:var(--bg-2);
+  border:1px solid var(--line);
+  border-radius:var(--r);
+  cursor:pointer;
+  display:flex;flex-direction:column;gap:4px;
+  color:var(--ink);
+  transition:all 0.3s var(--ease);
+  font-family:inherit;text-align:left;
+}
+.nav-btn:hover:not(:disabled){
+  background:var(--ink);color:#ffffff;
+  border-color:var(--ink);
+  transform:translateY(-2px);
+  box-shadow:0 12px 30px rgba(26,20,16,0.15);
+}
+.nav-btn:hover:not(:disabled) .nav-lbl{color:rgba(255,255,255,0.6)}
+.nav-btn:disabled{opacity:0.3;cursor:not-allowed}
+.nav-btn.next{text-align:right}
+.nav-lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);transition:color 0.3s}
+.nav-title{font-size:14px;font-weight:500;letter-spacing:-0.2px}
+
+/* =========== FINAL CARD =========== */
+.final{
+  margin:60px 0 0;padding:64px 48px;
+  background:linear-gradient(135deg,#1a1410,#2a1f18);
+  color:#ffffff;
+  border-radius:var(--r-lg);
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.final::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--rose),transparent);
+}
+.final h3{font-family:'Fraunces',serif;font-size:44px;font-weight:400;line-height:1.05;margin-bottom:18px;letter-spacing:-1px;color:#ffffff}
+.final h3 em{font-style:italic;color:var(--rose);font-weight:300}
+.final p{color:rgba(255,255,255,0.7);max-width:520px;margin:0 auto;font-size:15px;line-height:1.6}
+
+/* =========== UTIL =========== */
+.brand-icon{display:inline-block;vertical-align:middle}
+.divider{height:1px;background:var(--line);margin:48px 0;border:none}
+
+/* fade-in on scroll */
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.8s var(--ease),transform 0.8s var(--ease)}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* =========== WATERMARK ANTI-PIRACY =========== */
+.wm-pill{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:5px 10px;
+  background:rgba(110,28,46,0.06);
+  border:1px solid rgba(110,28,46,0.15);
+  border-radius:20px;
+  font-size:11px;color:var(--accent);
+  font-weight:500;letter-spacing:0.2px;
+  white-space:nowrap;max-width:280px;
+  overflow:hidden;text-overflow:ellipsis;
+}
+.wm-pill::before{
+  content:"";width:6px;height:6px;border-radius:50%;
+  background:var(--accent);flex-shrink:0;
+}
+.wm-footer{
+  margin-top:32px;padding-top:18px;border-top:1px solid var(--line);
+  font-size:11px;color:var(--muted);letter-spacing:0.3px;
+  display:flex;justify-content:space-between;align-items:center;gap:14px;
+  flex-wrap:wrap;
+}
+.wm-footer .em{color:var(--accent);font-weight:500}
+/* repeated bg pattern — visible on screenshots */
+.wm-bg{
+  position:fixed;inset:0;pointer-events:none;z-index:1;
+  background-image:var(--wm-pattern);
+  background-repeat:repeat;
+  opacity:0.04;
+  font-family:'Inter',sans-serif;
+}
+@media print{
+  .wm-bg{opacity:0.15 !important}
+  .wm-pill{display:inline-flex !important;background:#fff !important;border:1px solid #000 !important;color:#000 !important}
+}
+@media (max-width:600px){
+  .wm-pill{font-size:10px;max-width:200px;padding:4px 8px}
+}
+</style>
+</head>
+<body>
+
+<!-- ====== TOPBAR ====== -->
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="logo"><span class="logo-mark"></span><b>ItsXliLix</b></div>
+    <div class="prog">
+      <span class="wm-pill" id="wmPill" title="O teu acesso pessoal — não partilhes este link"><span class="wm-email">a carregar…</span></span>
+      <span id="progressText">0% completo</span>
+      <div class="prog-bar"><div class="prog-fill" id="progressFill"></div></div>
+      <button class="reset-btn" onclick="if(confirm('Apagar progresso?')){localStorage.clear();location.reload()}">reset</button>
+    </div>
+  </div>
+</div>
+<div class="wm-bg" id="wmBg"></div>
+
+<!-- ====== HERO ====== -->
+<section class="hero">
+  <div class="hero-eyebrow">ItsXliLix · Manual</div>
+  <h1>Constrói o teu <em>income</em><br>online.</h1>
+  <p class="hero-lead">Como funciona realmente este mercado, sem promessas vazias nem fórmulas mágicas — e como tudo o que aprendes aqui se aplica a qualquer negócio digital.</p>
+</section>
+
+<!-- ====== SHELL ====== -->
+<div class="shell">
+
+<aside class="sidebar">
+  <div class="side-label">Módulos</div>
+  <ul class="side-list" id="sideList">
+    <li class="side-item active" data-mod="m1"><span class="side-num"><span class="side-num-text">01</span></span>A realidade do mercado</li>
+    <li class="side-item" data-mod="m2"><span class="side-num"><span class="side-num-text">02</span></span>Os 5 níveis de exposição</li>
+    <li class="side-item" data-mod="m3"><span class="side-num"><span class="side-num-text">03</span></span>Limites &amp; mentalidade</li>
+    <li class="side-item" data-mod="m4"><span class="side-num"><span class="side-num-text">04</span></span>Persona &amp; posicionamento</li>
+    <li class="side-item" data-mod="m5"><span class="side-num"><span class="side-num-text">05</span></span>A arquitetura do funil</li>
+    <li class="side-item" data-mod="m6"><span class="side-num"><span class="side-num-text">06</span></span>Organizar o OnlyFans</li>
+    <li class="side-item" data-mod="m7"><span class="side-num"><span class="side-num-text">07</span></span>Psicologia &amp; vendas</li>
+    <li class="side-item" data-mod="m8"><span class="side-num"><span class="side-num-text">08</span></span>Tráfego: motores reais</li>
+    <li class="side-item" data-mod="m9"><span class="side-num"><span class="side-num-text">09</span></span>Telegram &amp; comunidade</li>
+    <li class="side-item" data-mod="m10"><span class="side-num"><span class="side-num-text">10</span></span>Conteúdo que converte</li>
+    <li class="side-item" data-mod="m11"><span class="side-num"><span class="side-num-text">11</span></span>Demonstrar expertise</li>
+    <li class="side-item" data-mod="m12"><span class="side-num"><span class="side-num-text">12</span></span>Saída &amp; diversificação</li>
+  </ul>
+</aside>
+
+<main class="main" id="main">
+
+<!-- ============ M1 ============ -->
+<article class="module active" id="m-m1">
+  <header class="mod-head">
+    <div class="mod-eyebrow">Módulo 01 — Introdução</div>
+    <h1 class="mod-title">A realidade do mercado</h1>
+    <p class="mod-intro">Antes de tudo: este manual não te promete dinheiro fácil. Se compraste à espera disso, devolve. O que vais ler é como funciona realmente o jogo, com base em quem está dentro a fazer dinheiro — e como tirar partido sem te queimares pelo caminho.</p>
+  </header>
+
+  <section class="sec">
+    <h3>3 verdades que vais querer ignorar</h3>
+    <p><strong>1. Os primeiros 60–90 dias rendem pouco ou nada.</strong> Quem desiste antes, perde. Quem aguenta entra na fase em que o sistema começa a render sozinho. A maioria desiste no mês 2.</p>
+    <p><strong>2. O dinheiro não está na subscrição.</strong> Está no que vendes depois — PPV, mensagens pagas, custom, bundles. Quem foca tudo em "vender subs" cobra €5 por nada e desiste sem perceber porquê.</p>
+    <p><strong>3. Sem persona, sem regras, sem limites — não há negócio.</strong> Há caos. E o caos paga mal.</p>
+    <div class="quote">Não estás a vender pixels. Estás a vender atenção, curiosidade e acesso. Quem percebe isto cobra bem. Quem não percebe queima-se em três meses.</div>
+  </section>
+
+  <section class="sec">
+    <h3>Quem ganha mesmo neste mercado</h3>
+    <p>A maior parte de quem cria fatura abaixo de €200/mês no OnlyFans. O top 1% fatura 5–6 dígitos. A diferença não é a aparência — é a arquitetura. Quem ganha bem tem <strong>um sistema</strong>: uma fonte de tráfego que alimenta uma comunidade que converte numa plataforma de pagamento.</p>
+    <div class="callout case">
+      <div class="callout-label">O meu caso</div>
+      <p>Construí a minha operação com uma arquitetura específica que vais ver decomposta ao longo deste manual: <strong>Pornhub</strong> como motor de tráfego massivo, <strong>Telegram</strong> como comunidade próxima, e <strong>OnlyFans</strong> como caixa registadora central.</p>
+      <p>Estou num nível de exposição alto — escolha minha, totalmente consciente. Mas a <em>arquitetura</em> que vou ensinar funciona em qualquer nível: tráfego → comunidade → conversão. Não tens de fazer o que eu faço para aplicar o que sei.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h3>Como ler este manual</h3>
+    <ul class="list">
+      <li><strong>12 módulos</strong> — lê pela ordem da primeira vez, depois volta aos que precisas.</li>
+      <li><strong>Quizz no fim de cada módulo</strong> — não é decoração. Se erras 50%+, lê outra vez. A informação não fica decorada por leres rápido.</li>
+      <li><strong>Cada módulo tem um "Princípio universal"</strong> — onde mostro como o conceito se aplica a qualquer negócio online. É o ponto que separa quem fica preso a uma indústria de quem aprende skills para sempre.</li>
+      <li><strong>Templates e estruturas</strong> — sempre que possível, dou-te o esqueleto pronto a copiar.</li>
+    </ul>
+
+    <div class="callout universal">
+      <div class="callout-label">Princípio universal</div>
+      <p>A regra dos "primeiros 60-90 dias a render pouco" não é exclusiva deste mercado — é a curva universal de qualquer negócio digital. SaaS, e-commerce, freelance, infoprodutos: todos têm uma fase de construção em que parece que "não está a funcionar".</p>
+      <p>O que separa quem ganha não é talento — é <strong>capacidade de continuar enquanto os outros desistem</strong>. Esta é a competência mais bem paga em qualquer mercado.</p>
+    </div>
+  </section>
+
+  <div class="quiz" data-quiz="m1">
+    <div class="quiz-head">
+      <div><div class="quiz-label">Quizz do módulo</div><div class="quiz-title">Conheces o terreno?</div></div>
+      <div class="quiz-prog" id="qp-m1">Pergunta 1 de 3</div>
+    </div>
+  </div>
+
+  <div class="mod-nav">
+    <button class="nav-btn prev" disabled><div class="nav-lbl">Anterior</div><div class="nav-title">—</div></button>
+    <button class="nav-btn next" data-next="m2"><div class="nav-lbl">Próximo</div><div class="nav-title">Os 5 níveis de exposição →</div></button>
+  </div>
+</article>
+
+<!-- ============ M2 ============ -->
+<article class="module" id="m-m2">
+  <header class="mod-head">
+    <div class="mod-eyebrow">Módulo 02 — Posicionamento</div>
+    <h1 class="mod-title">Não tens de <em>mostrar tudo</em></h1>
+    <p class="mod-intro">O maior mito deste mercado é que conteúdo adulto = nudez explícita. Não é. Existem 5 níveis de exposição e há criadores a faturar 4 ou 5 dígitos por mês em qualquer um deles. A diferença está em <em>como jogas</em>, não em <em>quanto mostras</em>.</p>
+  </header>
+
+  <section class="sec">
+    <h3>A pirâmide</h3>
+    <p>Cada nível atrai um tipo diferente de cliente, paga de forma diferente, tem riscos diferentes. Escolhe o teu com cabeça — começa baixo e sobe se fizer sentido. Não há volta atrás depois de publicar.</p>
+
+    <div class="pyramid">
+      <div class="pyramid-row" data-r="1">
+        <div class="pyramid-num">1</div>
+        <div>
+          <div class="pyramid-name">Tease / SFW</div>
+          <div class="pyramid-desc">Pés, mãos, lingerie, fitness, cosplay, ASMR, fetiches específicos sem nudez. Quem faz "feet content" fatura 4–5 dígitos por mês sem mostrar mais nada.</div>
+        </div>
+        <div class="pyramid-tag">Baixo risco</div>
+      </div>
+      <div class="pyramid-row" data-r="2">
+        <div class="pyramid-num">2</div>
+        <div>
+          <div class="pyramid-name">Implícito</div>
+          <div class="pyramid-desc">Nudez parcial, ângulos sugestivos, topless de costas. A venda está na imaginação, não na imagem.</div>
+        </div>
+        <div class="pyramid-tag">Risco moderado</div>
+      </div>
+      <div class="pyramid-row" data-r="3">
+        <div class="pyramid-num">3</div>
+        <div>
+          <div class="pyramid-name">Softcore</div>
+          <div class="pyramid-desc">Nudez total mas não explícita. Estética cuidada. Vende-se como "arte", não como porn.</div>
+        </div>
+        <div class="pyramid-tag">Risco médio</div>
+      </div>
+      <div class="pyramid-row" data-r="4">
+        <div class="pyramid-num">4</div>
+        <div>
+          <div class="pyramid-name">Explícito solo</div>
+          <div class="pyramid-desc">Conteúdo sexual explícito a solo. Mercado maior, concorrência maior, leak risk maior.</div>
+        </div>
+        <div class="pyramid-tag">Risco alto</div>
+      </div>
+      <div class="pyramid-row" data-r="5">
+        <div class="pyramid-num">5</div>
+        <div>
+          <div class="pyramid-name">Explícito com terceiros</div>
+          <div class="pyramid-desc">Cenas com outras pessoas. Potencial de receita maior, logística complexa, mais exposição. Não é para começar.</div>
+        </div>
+        <div class="pyramid-tag">Risco máximo</div>
+      </div>
+    </div>
+
+    <div class="callout case">
+      <div class="callout-label">O meu caso</div>
+      <p>Estou no Nível 5 — escolha minha, totalmente consciente. Faz parte da posição que escolhi no mercado. Mas <strong>não confundas</strong>: o que faz a minha operação funcionar não é o nível, é a arquitetura (PH → TG → OF) e a consistência da persona.</p>
+      <p>Há criadores no Nível 1 a faturar mais que muita gente no Nível 4. A nudez não vende. <em>A sensação</em> vende.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h3>Como escolher o teu nível</h3>
+    <p>Três perguntas, sem mentir a ti próprio:</p>
+    <ul class="list">
+      <li><strong>O que aceito daqui a 2 anos?</strong> Hoje pareces destemido. Daqui a 2 anos podes ter outro emprego, outra relação, outras coisas em jogo. Decide para esse futuro.</li>
+      <li><strong>O que faz sentido com a minha persona?</strong> Se a tua identidade é "girl/boy next door inocente", explícito quebra tudo. Coerência &gt; mostrar mais.</li>
+      <li><strong>Que mercado consigo dominar agora?</strong> Nichos de Nível 1 têm clientes obsessivos e menos concorrência. Top 5% num nicho pequeno &gt; invisível num grande.</li>
+    </ul>
+
+    <div class="callout warn">
+      <div class="callout-label">Atenção</div>
+      <p>Nunca subas de nível para satisfazer um cliente. Sobes quando <em>tu</em> queres, planeado, com preço acima. Subir para agradar quem paga €15 é vender a tua única vantagem competitiva por trocos.</p>
+    </div>
+  </section>
+
+  <div class="callout universal">
+    <div class="callout-label">Princípio universal — posicionamento de nicho</div>
+    <p>"Não tentes ser para todos" é a regra mais ignorada do marketing. Aplica-se ao designer (que tenta "todos os clientes" e morre à fome), ao restaurante (sem nicho, sem identidade), ao consultor.</p>
+    <p>Ser <strong>melhor para um nicho específico</strong> rende sempre mais que ser <strong>razoável para todos</strong>. O barbeiro que se posiciona como "especialista em barba grisalha" cobra 3x mais que o "barbeiro de tudo".</p>
+  </div>
+
+  <div class="quiz" data-quiz="m2">
+    <div class="quiz-head">
+      <div><div class="quiz-label">Quizz do módulo</div><div class="quiz-title">Sabes onde te posicionas?</div></div>
+      <div class="quiz-prog" id="qp-m2">Pergunta 1 de 4</div>
+    </div>
+  </div>
+
+  <div class="mod-nav">
+    <button class="nav-btn prev" data-prev="m1"><div class="nav-lbl">← Anterior</div><div class="nav-title">A realidade do mercado</div></button>
+    <button class="nav-btn next" data-next="m3"><div class="nav-lbl">Próximo</div><div class="nav-title">Limites &amp; mentalidade →</div></button>
+  </div>
+</article>
+
+<!-- ============ M3 ============ -->
+<article class="module" id="m-m3">
+  <header class="mod-head">
+    <div class="mod-eyebrow">Módulo 03 — Base interna</div>
+    <h1 class="mod-title">Limites &amp; mentalidade</h1>
+    <p class="mod-intro">Antes de tocar numa câmara: define as regras. Quem entra neste negócio sem regras claras acaba a fazer coisas que não quer, a cobrar mal e a queimar-se rapidamente.</p>
+  </header>
+
+  <section class="sec">
+    <h3>Vergonha não paga contas</h3>
+    <p>Quem vê o teu conteúdo pagou para o ver. Não estás a expor-te — estás a vender algo que alguém escolheu comprar. A vergonha vem da ideia de seres observado por quem te julga. Aqui não. Aqui são clientes.</p>
+    <p>Inseguranças com o corpo, toda a gente tem. Não é o teu corpo que decide se tens clientes — é o teu posicionamento, persona e marketing.</p>
+  </section>
+
+  <section class="sec">
+    <h3>Os 4 limites — define-os <em>antes</em> de começar</h3>
+    <p>Se não defines as regras, alguém vai defini-las por ti. E vai ser sempre alguém que paga mal.</p>
+
+    <div class="callout">
+      <div class="callout-label">1 · Limites de conteúdo</div>
+      <p>Até onde estás disponível para mostrar/fazer? Decide antes — sob pressão de cliente, decides mal. Põe por escrito. Não é "lista de tabus" — é o teu contrato contigo.</p>
+    </div>
+    <div class="callout">
+      <div class="callout-label">2 · Limites de comunicação</div>
+      <p>Nem todos merecem a tua atenção. Cliente tóxico vai-se embora — vai gastar €5 noutra pessoa. Aprende a dizer não e a bloquear sem culpa.</p>
+    </div>
+    <div class="callout">
+      <div class="callout-label">3 · Limites emocionais</div>
+      <p>Não confundas a personagem com a tua vida real. Não te envolvas. Estás a criar uma experiência, não uma relação. Quem se envolve perde dinheiro e cabeça.</p>
+    </div>
+    <div class="callout">
+      <div class="callout-label">4 · Limites de tempo e energia</div>
+      <p>Se respondes 24/7, queimas-te em 3 meses. Define horas de trabalho como qualquer profissional. Telemóvel desligado às 22h.</p>
+    </div>
+  </section>
+
+  <div class="callout universal">
+    <div class="callout-label">Princípio universal — limites separam profissional de amador</div>
+    <p>Em qualquer negócio, quem não tem limites trabalha o dobro por metade. O freelancer que aceita "só uma alteração" cinquenta vezes. O dentista que atende WhatsApp à meia-noite. O fundador que aceita reuniões a qualquer hora.</p>
+    <p><strong>Limites não são luxo — são o que te permite escalar.</strong> Quem aprende a dizer não cedo, cresce mais rápido em qualquer mercado.</p>
+  </div>
+
+  <div class="quiz" data-quiz="m3">
+    <div class="quiz-head">
+      <div><div class="quiz-label">Quizz do módulo</div><div class="quiz-title">Tens limites definidos?</div></div>
+      <div class="quiz-prog" id="qp-m3">Pergunta 1 de 3</div>
+    </div>
+  </div>
+
+  <div class="mod-nav">
+    <button class="nav-btn prev" data-prev="m2"><div class="nav-lbl">← Anterior</div><div class="nav-title">Os 5 níveis de exposição</div></button>
+    <button class="nav-btn next" data-next="m4"><div class="nav-lbl">Próximo</div><div class="nav-title">Persona &amp; posicionamento →</div></button>
+  </div>
+</article>
+
+<!-- ============ M4 ============ -->
+<article class="module" id="m-m4">
+  <header class="mod-head">
+    <div class="mod-eyebrow">Módulo 04 — Identidade</div>
+    <h1 class="mod-title">Persona &amp; posicionamento</h1>
+    <p class="mod-intro">As pessoas não seguem conteúdo. Seguem uma personagem com quem sentem ligação. Sem persona consistente, és substituível em 30 segundos por outro perfil parecido.</p>
+  </header>
+
+  <section class="sec">
+    <h3>Persona &gt; nome</h3>
+    <p>Toda a gente perde tempo a inventar o "nome perfeito". O nome só tem de ser <strong>fácil de decorar</strong> e <strong>coerente com a persona</strong>. Ponto. O valor está em tudo o resto.</p>
+    <p>Identidade é o que faz a pessoa reconhecer-te sem ver o nome — pela vibe, pelo ângulo, pelo tom como falas. Se hoje és uma coisa e amanhã és outra, ninguém cria ligação.</p>
+    <div class="quote">Porque é que alguém me escolheria a mim em vez de outra pessoa qualquer com mais nudez?</div>
+    <p>Se não tens resposta a esta pergunta, não tens persona. Trabalha isto antes de publicar seja o que for.</p>
+  </section>
+
+  <section class="sec">
+    <h3>Constrói a tua persona</h3>
+    <p>Responde a isto por escrito (sim, por escrito) antes de criar conteúdo:</p>
+    <ul class="list">
+      <li><strong>Palavra-chave única:</strong> "elegante", "selvagem", "fria", "doce", "dominante", "intelectual sexy". Uma palavra.</li>
+      <li><strong>Que tipo de pessoa me seguiria?</strong> Idade, perfil, o que procura.</li>
+      <li><strong>Que sensação quero transmitir em 3 segundos?</strong> A primeira impressão é tudo.</li>
+      <li><strong>Como falo?</strong> Direto ou brincalhão. Distante ou próximo. Decide e mantém.</li>
+      <li><strong>Que palavras nunca uso?</strong> E quais são só minhas?</li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <h3>Persona consistente <em>entre plataformas</em></h3>
+    <p>A persona não muda quando mudas de rede social. O mesmo nome, mesma vibe, mesma fotografia, mesma linguagem — em Pornhub <span class="brand"><svg class="brand-icon" viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><rect x="1" y="7" width="22" height="10" rx="2" fill="currentColor"/><text x="12" y="14.7" text-anchor="middle" font-family="Arial,sans-serif" font-size="7" font-weight="900" fill="#ffffff" stroke="none">hub</text></svg></span>, Telegram <span class="brand"><svg class="brand-icon" viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.24 3.64 11.95c-.88-.28-.89-.88.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.7L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg></span>, OnlyFans <span class="brand"><svg class="brand-icon" viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><text x="12" y="15.5" text-anchor="middle" font-size="8" font-family="Arial" font-weight="700" fill="currentColor" stroke="none">of</text></svg></span>, Instagram, TikTok, Reddit.</p>
+    <p>Quem te encontra primeiro num sítio e depois te vê noutro tem de pensar "é a mesma pessoa". É isso que cria reconhecimento e, por consequência, fidelização.</p>
+    <div class="callout case">
+      <div class="callout-label">Como eu faço</div>
+      <p>Tenho persona idêntica em todas as plataformas. Quem me encontra no Pornhub e procura <em>"ItsXliLix Telegram"</em> recebe a mesma vibe, mesma estética, mesma linguagem. A consistência é o que torna a transição de plataforma para plataforma <strong>natural</strong> — e, por isso, monetizável.</p>
+    </div>
+  </section>
+
+  <div class="callout universal">
+    <div class="callout-label">Princípio universal — marca pessoal</div>
+    <p>Persona consistente é branding pessoal. É o que faz o Cristiano Ronaldo vender perfume, cuecas e ginásios — não o futebol. É o que faz o Steve Jobs vender computadores como se fossem religião. É o que faz o teu barbeiro favorito ter lista de espera enquanto o do lado tem cadeiras vazias.</p>
+    <p><strong>A pessoa é o produto.</strong> O que vendes é variável; a marca pessoal é a constante.</p>
+  </div>
+
+  <div class="quiz" data-quiz="m4">
+    <div class="quiz-head">
+      <div><div class="quiz-label">Quizz do módulo</div><div class="quiz-title">Tens persona?</div></div>
+      <div class="quiz-prog" id="qp-m4">Pergunta 1 de 3</div>
+    </div>
+  </div>
+
+  <div class="mod-nav">
+    <button class="nav-btn prev" data-prev="m3"><div class="nav-lbl">← Anterior</div><div class="nav-title">Limites &amp; mentalidade</div></button>
+    <button class="nav-btn next" data-next="m5"><div class="nav-lbl">Próximo</div><div class="nav-title">A arquitetura do funil →</div></button>
+  </div>
+</article>
+
+<!-- ============ M5 ============ -->
+<article class="module" id="m-m5">
+  <header class="mod-head">
+    <div class="mod-eyebrow">Módulo 05 — Arquitetura</div>
+    <h1 class="mod-title">Tráfego → comunidade → <em>conversão</em></h1>
+    <p class="mod-intro">A diferença entre quem fatura €200/mês e quem fatura €20.000/mês não é talento, beleza ou conteúdo. É <em>arquitetura</em>. O que vem a seguir é a estrutura que sustenta as operações que funcionam neste mercado — e em qualquer negócio digital.</p>
+  </header>
+
+  <section class="sec">
+    <h3>O funil em 3 camadas</h3>
+    <div class="funnel">
+      <div class="funnel-step" data-step="01">
+        <div class="funnel-platforms">
+          <span class="brand"><svg class="brand-icon" viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><rect x="1" y="7" width="22" height="10" rx="2" fill="currentColor"/><text x="12" y="14.7" text-anchor="middle" font-family="Arial,sans-serif" font-size="7" font-weight="900" fill="#ffffff" stroke="none">hub</text></svg></span>
+          <span class="brand"><svg class="brand-icon" viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></span>
+          <span class="brand"><svg class="brand-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="14" r="7" fill="currentColor"/><circle cx="9" cy="13.5" r="1.2" fill="#ffffff" stroke="none"/><circle cx="15" cy="13.5" r="1.2" fill="#ffffff" stroke="none"/><path d="M9 16.8c.8.7 1.9 1 3 1s2.2-.3 3-1" fill="none" stroke="#f0e7d4" stroke-width="1.1" stroke-linecap="round"/><circle cx="12" cy="3.5" r="1.3" fill="currentColor"/><line x1="12" y1="4.8" x2="12" y2="6.5" stroke="currentColor" stroke-width="1.4"/></svg></span>
+          <span class="brand"><svg class="brand-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"/></svg></span>
+          <span class="brand"><svg class="brand-icon" viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M16 4c0 2.2 1.8 4 4 4v3c-1.5 0-2.9-.5-4-1.3V16c0 3.3-2.7 6-6 6s-6-2.7-6-6 2.7-6 6-6c.3 0 .7 0 1 .1V13c-.3-.1-.6-.2-1-.2-1.7 0-3 1.3-3 3s1.3 3 3 3 3-1.3 3-3V4h3z"/></svg></span>
+        </div>
+        <h4>Tráfego</h4>
+        <h5>Atrai desconhecidos</h5>
+        <p>Conteúdo público que gera curiosidade. Volume alto, conversão baixa. Aqui só vendes <em>atenção</em> — o objetivo é levar a pessoa para o próximo degrau.</p>
+      </div>
+      <div class="funnel-step" data-step="02">
+        <div class="funnel-platforms">
+          <span class="brand"><svg class="brand-icon" viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.24 3.64 11.95c-.88-.28-.89-.88.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.7L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg></span>
+          <span class="brand"><svg class="brand-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M19 5.3c-1.4-.6-2.8-1-4.3-1.2-.2.3-.4.7-.6 1-1.6-.2-3.1-.2-4.7 0-.2-.3-.3-.7-.6-1C7.4 4.3 6 4.7 4.6 5.3 2 9.2 1.3 13 1.7 16.7c1.7 1.2 3.3 2 5 2.5l.4-.6c-.8-.3-1.6-.7-2.3-1.1.2-.1.4-.3.5-.4 3.3 1.5 6.9 1.5 10.2 0 .2.1.4.3.5.4-.7.5-1.5.8-2.3 1.1l.4.6c1.7-.5 3.3-1.3 5-2.5.4-4.4-.7-8.1-3.1-11.4z" fill="currentColor" stroke="none"/><ellipse cx="9.2" cy="13.5" rx="1.2" ry="1.7" fill="#ffffff" stroke="none"/><ellipse cx="14.8" cy="13.5" rx="1.2" ry="1.7" fill="#ffffff" stroke="none"/></svg></span>
+          <span class="brand">Email</span>
+        </div>
+        <h4>Comunidade</h4>
+        <h5>Aproxima os interessados</h5>
+        <p>Espaço fechado, semi-pago. Vê-te de forma mais próxima. Cria sensação de "estou dentro". A confiança constrói-se aqui — é aqui que a pessoa decide gastar a sério.</p>
+      </div>
+      <div class="funnel-step" data-step="03">
+        <div class="funnel-platforms">
+          <span class="brand"><svg class="brand-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><text x="12" y="15.5" text-anchor="middle" font-size="8" font-family="Arial" font-weight="700" fill="currentColor" stroke="none">of</text></svg></span>
+          <span class="brand">Fansly</span>
+          <span class="brand">Fanvue</span>
+        </div>
+        <h4>Conversão</h4>
+        <h5>Onde está o pagamento</h5>
+        <p>A caixa registadora. Subscrição, PPV, mensagens pagas, custom. Aqui não há tempo para "criar relação" — quem chega já está pronto. Maximizas o ticket médio.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:24px">Cada peça tem uma função específica. Misturar funções estraga tudo.</p>
+    <ul class="list">
+      <li>Quem tenta <strong>vender no tráfego</strong> assusta os curiosos e perde-os antes de aquecerem.</li>
+      <li>Quem usa a <strong>comunidade só para vender</strong> queima a confiança e perde os fãs mais leais.</li>
+      <li>Quem trata o <strong>OnlyFans como rede social</strong> (espera tráfego orgânico, posts "para o algoritmo") fica preso à plataforma sem audiência própria.</li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <h3>A minha arquitetura, decomposta</h3>
+    <div class="callout case">
+      <div class="callout-label">Como funciona a minha operação</div>
+      <p><strong>Pornhub</strong> · É a maior fonte de tráfego adulto da internet. Como estou disposta a publicar conteúdo explícito ali, tenho acesso a milhões de visualizações grátis. Publico <strong>2 a 4 vídeos por semana</strong>, normalmente entre <strong>5 a 8 minutos</strong>, com títulos que combinam keyword forte + persona + fetiche relevante. Cada vídeo é uma "máquina de descoberta" 24/7. É onde introduzo a persona, fixo o nome, crio curiosidade. O nome <em>ItsXliLix</em> aparece em todos os títulos e tags — isto é fundamental.</p>
+      <p><strong>Telegram</strong> · Quem se interessa procura o canal pelo nome (literalmente "ItsXliLix Telegram" no Google). Tenho um <strong>canal público</strong> com stories diários e prévias, e dependendo da estratégia podes ter também um <strong>canal VIP pago</strong> (€10–20/mês) para conteúdo mais íntimo. Aqui é onde a audiência fria do PH aquece. É o degrau que prepara a venda.</p>
+      <p><strong>OnlyFans</strong> · A camada de monetização. Quem chega ao OF vindo do Telegram já <em>quer comprar</em>. Uso subscrição grátis + PPV agressivo (média €15–25) + custom para os whales. A venda é quase automática — o trabalho difícil foi feito nos degraus anteriores.</p>
+      <p style="margin-top:12px">É por isto que faturo ordens de grandeza mais que criadores no mesmo nível de exposição que tentam vender direto no PH ou que dependem só do OF. <strong>A arquitetura é o multiplicador silencioso.</strong></p>
+    </div>
+  </section>
+
+  <div class="callout universal">
+    <div class="callout-label">Princípio universal — o funil é a chave de qualquer negócio digital</div>
+    <p>Este modelo de 3 camadas é o mais usado em todo o marketing online — só mudam as plataformas:</p>
+    <ul class="list compact">
+      <li><strong>YouTuber:</strong> YouTube (tráfego) → Newsletter/Discord (comunidade) → Curso/Coaching (conversão).</li>
+      <li><strong>SaaS:</strong> Conteúdo SEO (tráfego) → Free trial (comunidade) → Subscrição paga (conversão).</li>
+      <li><strong>Coach:</strong> TikTok (tráfego) → DM/Workshop grátis (comunidade) → 1:1 €1000+ (conversão).</li>
+      <li><strong>E-commerce:</strong> Ads pagos (tráfego) → Lista email/Loyalty (comunidade) → Compra recorrente (conversão).</li>
+    </ul>
+    <p>É o mesmo jogo. Quem percebe a estrutura aplica-a a qualquer mercado.</p>
+  </div>
+
+  <div class="quiz" data-quiz="m5">
+    <div class="quiz-head">
+      <div><div class="quiz-label">Quizz do módulo</div><div class="quiz-title">Percebes o funil?</div></div>
+      <div class="quiz-prog" id="qp-m5">Pergunta 1 de 4</div>
+    </div>
+  </div>
+
+  <div class="mod-nav">
+    <button class="nav-btn prev" data-prev="m4"><div class="nav-lbl">← Anterior</div><div class="nav-title">Persona &amp; posicionamento</div></button>
+    <button class="nav-btn next" data-next="m6"><div class="nav-lbl">Próximo</div><div class="nav-title">Organizar o OnlyFans →</div></button>
+  </div>
+</article>
+
+<!-- ============ M6 ============ -->
+<article class="module" id="m-m6">
+  <header class="mod-head">
+    <div class="mod-eyebrow">Módulo 06 — Operação</div>
+    <h1 class="mod-title">Como organizar o <em>OnlyFans</em></h1>
+    <p class="mod-intro">O OnlyFans é uma caixa registadora com muitas alavancas. Se não as conheces, deixas dinheiro em cima da mesa todos os dias. Este é o módulo mais prático do manual — segue-o à risca na primeira configuração.</p>
+  </header>
+
+  <section class="sec">
+    <h3>Decisão 1 · Subscrição paga vs grátis</h3>
+    <p>É a primeira escolha estrutural. Há duas escolas e ambas funcionam — depende do teu jogo.</p>
+    <div class="tbl">
+      <div class="tbl-row header"><div class="tbl-cell">Modelo</div><div class="tbl-cell">Quando faz sentido</div></div>
+      <div class="tbl-row">
+        <div class="tbl-cell"><strong>Subscrição paga</strong><br><span style="color:var(--muted);font-size:12px">€7–25/mês</span></div>
+        <div class="tbl-cell">Posicionamento premium, filtro de qualidade, audiência menor mas mais comprometida. O conteúdo na timeline já justifica a subscrição. Ticket médio mais previsível.</div>
+      </div>
+      <div class="tbl-row">
+        <div class="tbl-cell"><strong>Subscrição grátis</strong><br><span style="color:var(--muted);font-size:12px">"Free funnel"</span></div>
+        <div class="tbl-cell">Atrai volume, vende tudo via PPV e mensagens. Exige skill de copywriting/mensagens. Ticket médio mais alto, mas exige mais trabalho ativo. É o modelo mais comum atualmente.</div>
+      </div>
+    </div>
+    <div class="callout tip">
+      <div class="callout-label">Recomendação prática</div>
+      <p>Começa em <strong>subscrição grátis</strong> nos primeiros 3 meses. Atrais audiência, treinas vendas por mensagem, percebes o que converte. Depois, se a persona o justifica, podes migrar para paga e blindar o perfil.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h3>Decisão 2 · A estrutura de preços (escada)</h3>
+    <p>O perfil tem de ter <strong>uma escada de preços clara</strong>. Cliente novo entra em baixo; cliente envolvido sobe. Esquema base:</p>
+    <div class="tbl">
+      <div class="tbl-row header"><div class="tbl-cell">Tipo de oferta</div><div class="tbl-cell">Preço sugerido</div></div>
+      <div class="tbl-row"><div class="tbl-cell">Subscrição</div><div class="tbl-cell">Grátis ou €7–15/mês</div></div>
+      <div class="tbl-row"><div class="tbl-cell">PPV entrada</div><div class="tbl-cell">€5–10 (foto-set, vídeo curto)</div></div>
+      <div class="tbl-row"><div class="tbl-cell">PPV médio</div><div class="tbl-cell">€15–25 (vídeo de 3–8 min)</div></div>
+      <div class="tbl-row"><div class="tbl-cell">PPV premium</div><div class="tbl-cell">€30–80 (vídeo longo, mais explícito)</div></div>
+      <div class="tbl-row"><div class="tbl-cell">Custom (foto)</div><div class="tbl-cell">€30–80</div></div>
+      <div class="tbl-row"><div class="tbl-cell">Custom (vídeo)</div><div class="tbl-cell">€80–300+</div></div>
+      <div class="tbl-row"><div class="tbl-cell">Bundle de 3 meses</div><div class="tbl-cell">Subscrição × 3 com 20% desconto</div></div>
+      <div class="tbl-row"><div class="tbl-cell">Tip menu (ações)</div><div class="tbl-cell">€3–50 cada (ver abaixo)</div></div>
+    </div>
+    <div class="callout warn">
+      <div class="callout-label">Importante — são sugestões, não regras</div>
+      <p>Todos os valores que vês neste manual (aqui, no tip menu, nos ranges de PPV, na welcome ladder) são <strong>pontos de partida sugeridos</strong>, não verdades absolutas. O preço certo depende do teu nível na pirâmide (Módulo 02), da tua persona, do teu mercado e — sobretudo — de quanto tempo já tens a construir audiência.</p>
+      <p>Testa, observa, ajusta. Sobe €5 e vê a taxa de conversão. Não há "preço óptimo universal" — há o preço óptimo <em>para ti, neste momento</em>.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h3>O preço molda a tua audiência — não é só matemática</h3>
+    <p>Antes de fixares os preços, percebe isto: <strong>o preço que escolhes decide o tipo de cliente que vais ter</strong>, não apenas quanto vais faturar. Preço baixo atrai volume. Preço alto filtra. E cada modelo tem trade-offs muito diferentes.</p>
+
+    <div class="tbl">
+      <div class="tbl-row header"><div class="tbl-cell">Modelo</div><div class="tbl-cell">Realidade operacional</div></div>
+      <div class="tbl-row">
+        <div class="tbl-cell"><strong>Volume / soft</strong><br><span style="color:var(--muted);font-size:12px">2.000+ fãs, preços baixos</span></div>
+        <div class="tbl-cell">Subs €5–10. PPV €8–15. Conteúdo menos explícito. Atrais muita gente, mas a maioria gasta pouco. Exige <strong>muito trabalho de mensagens</strong> para extrair valor. Burnout alto.</div>
+      </div>
+      <div class="tbl-row">
+        <div class="tbl-cell"><strong>Nicho / premium</strong><br><span style="color:var(--muted);font-size:12px">300–500 fãs, preços altos</span></div>
+        <div class="tbl-cell">Subs €15–25 (ou grátis com PPV de €30–80). Conteúdo mais explícito, nicho ou exclusividade clara. Menos fãs mas <strong>cada um vale muito mais</strong>. Menos mensagens, mas exige reputação e oferta diferenciada.</div>
+      </div>
+    </div>
+
+    <p style="margin-top:18px"><strong>A matemática que ninguém te mostra:</strong></p>
+    <div class="callout case">
+      <div class="callout-label">Exemplo real — mesma receita, operações opostas</div>
+      <p><strong>Criadora A</strong> · 2.000 subscritores a €5/mês + ticket médio €7 em PPV. Receita: 2.000 × €12 = <strong>€24.000/mês</strong>. Trabalha 50+ horas/semana só em mensagens. Conteúdo soft.</p>
+      <p><strong>Criadora B</strong> · 300 subscritores (grátis ou €15) + ticket médio €70 em PPV explícito e custom. Receita: 300 × €80 = <strong>€24.000/mês</strong>. Trabalha 25 horas/semana. Conteúdo explícito ou nicho exclusivo.</p>
+      <p style="margin-top:10px"><strong>Mesma receita. Metade do trabalho.</strong> A diferença está no preço médio por cliente — que vem de uma combinação de nicho, exclusividade e nível de exposição (Módulo 02).</p>
+    </div>
+
+    <p>Por outras palavras: <strong>não precisas de ser massivo para ganhar bem</strong>. Precisas de decidir <em>que tipo de operação queres ter</em>. Volume baixo com ticket alto é frequentemente mais saudável (e menos exposto) que volume alto com ticket baixo.</p>
+
+    <div class="callout tip">
+      <div class="callout-label">Implicação prática</div>
+      <p>Se estás a começar e tens pouca audiência: <strong>não baixes preços para "atrair mais"</strong>. Posiciona-te como premium desde o início, mesmo que demore mais a chegar aos primeiros clientes. É sempre mais fácil descer preço depois do que tentar subir quando já te conhecem como "barato".</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h3>Decisão 3 · Configura o Tip Menu</h3>
+    <p>O Tip Menu é uma das funcionalidades menos usadas, e das mais lucrativas. É uma lista pública de "ações ou conteúdos" com preço — quem quer compra com um clique.</p>
+    <p>Exemplo de tip menu (adapta ao teu nível):</p>
+    <ul class="list compact">
+      <li>Mensagem personalizada — €5</li>
+      <li>Áudio personalizado — €10</li>
+      <li>Vídeo de feedback ao perfil — €15</li>
+      <li>Bom dia/boa noite por DM (1 semana) — €20</li>
+      <li>Vídeo personalizado curto — €40</li>
+      <li>Sessão sexting 30min — €60</li>
+    </ul>
+    <p>O Tip Menu funciona como o menu de pequeno-almoço dum hotel: a maioria não vai pedir tudo, mas <strong>ver opções faz com que peça pelo menos uma</strong>.</p>
+  </section>
+
+  <section class="sec">
+    <h3>Decisão 4 · A welcome message (DM automática)</h3>
+    <p>Configura a mensagem que vai automaticamente para quem subscreve. Esta é a primeira impressão na fase mais quente da relação — usa-a.</p>
+
+    <div class="template">
+      <div class="template-label">Template — welcome message (modelo grátis)</div>
+      <div class="template-body">Olá amor 🤍 ainda bem que decidiste juntar-te ao meu mundo.
+
+Eu posto coisas todos os dias por aqui, mas o que eu MESMO partilho contigo é por mensagem.
+
+Tenho uma surpresa preparada para ti agora. Mas antes diz-me — como queres que te trate? 😉</div>
+    </div>
+    <p style="font-size:13px;color:var(--muted);margin-top:8px">A última pergunta é o gancho — abre conversa. Em 70% dos casos a pessoa responde, e aí já tens contexto para um PPV personalizado.</p>
+  </section>
+
+  <section class="sec">
+    <h3>Decisão 5 · Listas de fãs (segmentação)</h3>
+    <p>O OnlyFans permite criar listas privadas com tags. Usa isto. Não tratas o cliente que gastou €5 igual ao que gastou €500. Estrutura mínima:</p>
+    <ul class="list">
+      <li><strong>VIP / Whales</strong> · gastaram &gt;€100 em PPV/tips. Recebem PPV exclusivo, atenção personalizada, primeiro acesso a tudo.</li>
+      <li><strong>Ativos</strong> · gastaram &gt;€20 nas últimas semanas. Recebem mass messages com PPV adequado ao histórico.</li>
+      <li><strong>Frios</strong> · subscrevem mas não compram. Recebem teasers para tentar reativar — se em 30 dias nada, ignora.</li>
+      <li><strong>Freeloaders</strong> · nunca compraram, mandam mensagens estranhas. Bloqueia ou ignora. Não vale o tempo.</li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <h3>Decisão 6 · Mass messages — a alavanca semanal</h3>
+    <p>É o teu "newsletter pago". A regra: <strong>2 a 4 mass messages por semana</strong>, cada uma com PPV adequado ao segmento. Não envies mensagem só "para falar" — cada mensagem tem uma oferta clara.</p>
+    <div class="template">
+      <div class="template-label">Template — mass message com PPV</div>
+      <div class="template-body">Estive a gravar isto durante 2 horas hoje 🔥
+
+Provavelmente é a coisa mais [adjetivo] que já fiz. Não vou postar isto no perfil.
+
+Mando-te? €20.</div>
+    </div>
+    <p style="font-size:13px;color:var(--muted);margin-top:8px">Curto. Concreto. Cria curiosidade. Preço claro. Sem floreados.</p>
+
+    <h4 style="margin-top:32px">Welcome ladder — sequência real para os 7 primeiros dias</h4>
+    <p>Quem subscreve hoje provavelmente vai gastar mais nos primeiros 7 dias do que nos 30 seguintes. Aproveita essa janela com uma sequência preparada:</p>
+    <div class="tbl">
+      <div class="tbl-row header"><div class="tbl-cell">Dia</div><div class="tbl-cell">Mensagem / oferta</div></div>
+      <div class="tbl-row"><div class="tbl-cell"><strong>Dia 0</strong></div><div class="tbl-cell">Welcome message automática (ver Decisão 4). Pergunta aberta para começar conversa.</div></div>
+      <div class="tbl-row"><div class="tbl-cell"><strong>Dia 1</strong></div><div class="tbl-cell">PPV entrada €8–10 com foto-set. Risco baixo, primeira venda rápida cria hábito.</div></div>
+      <div class="tbl-row"><div class="tbl-cell"><strong>Dia 3</strong></div><div class="tbl-cell">PPV médio €18 — vídeo curto. Quem comprou o anterior está pronto a subir.</div></div>
+      <div class="tbl-row"><div class="tbl-cell"><strong>Dia 5</strong></div><div class="tbl-cell">Mensagem pessoal "estive a pensar em ti" + tip menu lembrete (sem PPV — soft touch).</div></div>
+      <div class="tbl-row"><div class="tbl-cell"><strong>Dia 7</strong></div><div class="tbl-cell">PPV premium €35–50 com escassez ("só envio a 5 pessoas hoje"). É aqui que separas o cliente normal do whale.</div></div>
+    </div>
+    <p style="font-size:13px;color:var(--muted);margin-top:8px">Esta sequência automatizada via OF List Tags ou ManyChat duplica facilmente o ticket médio dos primeiros 30 dias.</p>
+  </section>
+
+  <section class="sec">
+    <h3>Decisão 7 · Calendário &amp; vault (banco de conteúdo)</h3>
+    <p>Não publiques "quando te lembras". Estrutura mínima:</p>
+    <ul class="list">
+      <li><strong>3–5 posts por semana</strong> na timeline (mistura de tease/foto/vídeo curto).</li>
+      <li><strong>1 vídeo PPV nas mensagens, 2× por semana</strong>.</li>
+      <li><strong>1 "evento" especial por mês</strong> — bundle limitado, custom com desconto, conteúdo sazonal.</li>
+      <li><strong>Banco de conteúdo (vault):</strong> grava 2 semanas de uma vez. Não andas a correr atrás do prejuízo.</li>
+    </ul>
+    <div class="callout warn">
+      <div class="callout-label">Erro comum</div>
+      <p>Publicar tudo no mesmo dia em rajada e depois ficar 5 dias em silêncio. O algoritmo do OF favorece consistência diária — falar todos os dias, mesmo que pouco, mantém a notificação ativa.</p>
+    </div>
+  </section>
+
+  <div class="callout universal">
+    <div class="callout-label">Princípio universal — segmentação de cliente</div>
+    <p>Listas de fãs = segmentação de cliente. Toda a empresa séria faz isto:</p>
+    <p>O SaaS separa "trial / paid / churned". O e-commerce separa "first-time / returning / VIP". O coach separa "lead / cliente / referrer". Tratam diferente, ofertam diferente.</p>
+    <p>Quem trata todos os clientes da mesma forma <strong>deixa dinheiro na mesa todos os dias</strong>. O top 10% paga 80% das contas — vê-los bem é a única coisa que importa.</p>
+  </div>
+
+  <div class="quiz" data-quiz="m6">
+    <div class="quiz-head">
+      <div><div class="quiz-label">Quizz do módulo</div><div class="quiz-title">Configuras com cabeça?</div></div>
+      <div class="quiz-prog" id="qp-m6">Pergunta 1 de 4</div>
+    </div>
+  </div>
+
+  <div class="mod-nav">
+    <button class="nav-btn prev" data-prev="m5"><div class="nav-lbl">← Anterior</div><div class="nav-title">A arquitetura do funil</div></button>
+    <button class="nav-btn next" data-next="m7"><div class="nav-lbl">Próximo</div><div class="nav-title">Psicologia &amp; vendas →</div></button>
+  </div>
+</article>
+
+<!-- ============ M7 ============ -->
+<article class="module" id="m-m7">
+  <header class="mod-head">
+    <div class="mod-eyebrow">Módulo 07 — Psicologia</div>
+    <h1 class="mod-title">Porque é que <em>pagam</em> realmente</h1>
+    <p class="mod-intro">Há conteúdo adulto grátis em todo o lado. Se fosse só pelo conteúdo, ninguém pagava. O que faz alguém puxar do cartão é outra coisa — e quem percebe esta cabeça, vende mais que quem só "produz".</p>
+  </header>
+
+  <section class="sec">
+    <h3>Os 4 motores da decisão de pagar</h3>
+    <ul class="list">
+      <li><strong>Atenção individual</strong> · sentir que estás a falar com ele/ela, especificamente. Mesmo que seja ilusão.</li>
+      <li><strong>Curiosidade</strong> · ver algo que ainda não viu. Algo fechado, escondido, sugerido mas não mostrado.</li>
+      <li><strong>Ilusão de proximidade</strong> · sentir que tem acesso à "pessoa real", não a um produto industrial.</li>
+      <li><strong>Exclusividade</strong> · sensação de que poucos têm. Quanto mais raro parece, mais vale.</li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <h3>Curiosidade &amp; escassez — as alavancas</h3>
+    <p><strong>Curiosidade:</strong> nunca mostres tudo. Cortes, ângulos, "o que aconteceu a seguir foi mais...". Quem pensa "quero ver o resto" paga. Quem pensa "já vi tudo" sai.</p>
+    <p><strong>Escassez:</strong> "só por hoje", "vou apagar amanhã", "limite de 10 unidades". Funciona — mas <em>tem de ser verdade</em>. Quem diz limitado e repete, queima credibilidade. Não brinques com isto.</p>
+  </section>
+
+  <section class="sec">
+    <h3>Push &amp; Pull</h3>
+    <p>Sempre disponível = perdes valor. Sempre distante = perdes interesse. O jogo é alternar.</p>
+    <ul class="list">
+      <li>Há momentos em que respondes rápido, dás atenção, crias proximidade.</li>
+      <li>Há momentos em que demoras, deixas espaço, fazes a pessoa procurar-te.</li>
+      <li>A pessoa investe mais atenção a manter o contacto contigo — e isso aumenta o envolvimento.</li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <h3>Conversa que leva à venda</h3>
+    <p>Não há fórmula única, mas há estrutura. Cada conversa de venda passa por 4 fases:</p>
+    <ul class="list">
+      <li><strong>1. Gancho personalizado</strong> · começa com algo específico (nome, comentário recente). Quebra o automático.</li>
+      <li><strong>2. Curiosidade</strong> · "Estive a gravar uma coisa hoje...". Não dás detalhes. Crias espaço.</li>
+      <li><strong>3. Provocação leve</strong> · uma frase, uma prévia, um teaser textual.</li>
+      <li><strong>4. Oferta direta</strong> · "queres ver? €X". Sem floreados. Sem perguntas. Direto.</li>
+    </ul>
+    <div class="callout warn">
+      <div class="callout-label">O erro mais comum</div>
+      <p>Atirar a oferta sem construir as fases anteriores: <em>"oi amor queres ver um vídeo especial 20€?"</em> Isto não vende. A venda é a <strong>consequência</strong> da conversa, nunca o ponto de partida.</p>
+    </div>
+  </section>
+
+  <div class="callout universal">
+    <div class="callout-label">Princípio universal — copywriting</div>
+    <p>Tudo isto é <strong>copywriting</strong>, a skill mais bem paga do marketing. O Ogilvy escrevia anúncios de carros nos anos 60 usando exatamente os mesmos princípios: gancho → curiosidade → benefício específico → call to action direto.</p>
+    <p>Quem domina venda por mensagem em OF sabe vender qualquer coisa por DM, email, página, anúncio. É a competência mais transferível que existe.</p>
+  </div>
+
+  <div class="quiz" data-quiz="m7">
+    <div class="quiz-head">
+      <div><div class="quiz-label">Quizz do módulo</div><div class="quiz-title">Sabes a cabeça do cliente?</div></div>
+      <div class="quiz-prog" id="qp-m7">Pergunta 1 de 4</div>
+    </div>
+  </div>
+
+  <div class="mod-nav">
+    <button class="nav-btn prev" data-prev="m6"><div class="nav-lbl">← Anterior</div><div class="nav-title">Organizar o OnlyFans</div></button>
+    <button class="nav-btn next" data-next="m8"><div class="nav-lbl">Próximo</div><div class="nav-title">Tráfego: motores reais →</div></button>
+  </div>
+</article>
+
+<!-- ============ M8 ============ -->
+<article class="module" id="m-m8">
+  <header class="mod-head">
+    <div class="mod-eyebrow">Módulo 08 — Tráfego</div>
+    <h1 class="mod-title">Onde encontras a tua <em>audiência</em></h1>
+    <p class="mod-intro">Sem tráfego, o OF é um restaurante vazio com a melhor comida do mundo. Cada plataforma tem o seu jogo, regras e perfil de cliente. A maioria perde aqui — divulga mal, leva ban, ou tenta estar em todas e não domina nenhuma.</p>
+  </header>
+
+  <section class="sec">
+    <h3>Plataformas — qual escolher</h3>
+    <div class="tbl">
+      <div class="tbl-row header"><div class="tbl-cell">Plataforma</div><div class="tbl-cell">Para quem &amp; como funciona</div></div>
+      <div class="tbl-row">
+        <div class="tbl-cell"><strong>Pornhub</strong> <span style="color:var(--muted);font-size:12px;display:block">explícito</span></div>
+        <div class="tbl-cell">Maior tráfego adulto da internet. Permite conteúdo explícito grátis. Algoritmo favorece consistência. <strong>Vídeos de 5–8 min</strong> têm sweet spot. Inscreve-te como <em>Verified Model</em> assim que possível — duplica visibilidade. Títulos: keyword + persona + fetiche. <em>É o motor principal da minha operação.</em></div>
+      </div>
+      <div class="tbl-row">
+        <div class="tbl-cell"><strong>X (Twitter)</strong> <span style="color:var(--muted);font-size:12px;display:block">explícito permitido</span></div>
+        <div class="tbl-cell">Permite nudez. Comunidade adulta gigante. Ótimo para tráfego orgânico sem risco de ban. <strong>RT trains</strong> entre criadoras aos domingos. Repost de criadoras maiores em troca de gorjeta/PPV (paid promo). 2–3 posts/dia.</div>
+      </div>
+      <div class="tbl-row">
+        <div class="tbl-cell"><strong>Reddit</strong> <span style="color:var(--muted);font-size:12px;display:block">explícito por subreddit</span></div>
+        <div class="tbl-cell">Subreddits NSFW com regras diferentes. Tráfego muito qualificado — quem clica está realmente interessado. Subreddits por categoria (corpo, fetiche, look) e os de promoção como <em>r/OnlyFansPromotions</em>. Lê as regras antes de postar — bans são fáceis.</div>
+      </div>
+      <div class="tbl-row">
+        <div class="tbl-cell"><strong>Telegram</strong> <span style="color:var(--muted);font-size:12px;display:block">comunidade + cross-promo</span></div>
+        <div class="tbl-cell">É a peça de comunidade central (Módulo 09) mas também tráfego: <strong>cross-promo entre canais</strong> é a forma mais subestimada de crescer rápido. Tu promoves outra criadora no teu canal, ela promove-te. Funciona como retweet trains, mas multiplicador.</div>
+      </div>
+      <div class="tbl-row">
+        <div class="tbl-cell"><strong>Instagram</strong> <span style="color:var(--muted);font-size:12px;display:block">SFW obrigatório</span></div>
+        <div class="tbl-cell">Audiência massiva mas conservadora. Persona "softer", trocadilhos, sugestão. Bom para criar marca. Risco de ban se forçar.</div>
+      </div>
+      <div class="tbl-row">
+        <div class="tbl-cell"><strong>TikTok</strong> <span style="color:var(--muted);font-size:12px;display:block">SFW obrigatório</span></div>
+        <div class="tbl-cell">Algoritmo brutal — pode dar 100k views a um vídeo random. Persona muito disfarçada, conteúdo "lifestyle". Tráfego volátil mas explosivo.</div>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-label">Estratégia recomendada</div>
+      <p>Não tentes estar em 5 plataformas. Escolhe <strong>2 motores</strong>: um para conteúdo explícito (PH, X ou Reddit), outro mais "civil" (Instagram ou TikTok). Domina um, depois outro. Diversificar &gt; espalhar.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h3>Como evitar bans no IG &amp; TikTok</h3>
+    <ul class="list">
+      <li>Evita roupas demasiado reveladoras em posts repetidos. O algoritmo detecta padrões.</li>
+      <li>Nada de "link na bio" em cada post — flag automático. A audiência aprende sozinha onde procurar.</li>
+      <li>Não uses hashtags óbvias do meio (#onlyfans, #of, #linkinbio).</li>
+      <li>Varia ângulos, ambientes, roupas. Mesmo vídeo igual a outro pode ser apanhado por detecção.</li>
+      <li>Trocadilhos &gt; explícito. Sugestão &gt; mostrar.</li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <h3>CTA disfarçado</h3>
+    <p>CTA (Call To Action) é o que motiva a pessoa a clicar. Em IG/TikTok não pode ser óbvio. CTA inclui:</p>
+    <ul class="list compact">
+      <li>O que dizes no vídeo ("não posso mostrar tudo aqui...").</li>
+      <li>O tom com que terminas — provocação, mistério, "vais querer ver o que vem a seguir".</li>
+      <li>Posts que sugerem que "o resto está noutro sítio" sem dizer onde.</li>
+      <li>Bio com pista visual — emoji, palavra-chave, sem links explícitos.</li>
+    </ul>
+  </section>
+
+  <div class="callout universal">
+    <div class="callout-label">Princípio universal — concentração &gt; espalhamento</div>
+    <p>Quem tenta estar em todas as redes nunca domina nenhuma. A regra de qualquer negócio digital: <strong>domina uma plataforma antes de adicionar a segunda</strong>.</p>
+    <p>O criador que faz 10 vídeos no TikTok e domina o algoritmo de uma fatura mais que quem faz 2 em cinco plataformas. Foco vence ambição cega.</p>
+  </div>
+
+  <div class="quiz" data-quiz="m8">
+    <div class="quiz-head">
+      <div><div class="quiz-label">Quizz do módulo</div><div class="quiz-title">Sabes onde estar?</div></div>
+      <div class="quiz-prog" id="qp-m8">Pergunta 1 de 3</div>
+    </div>
+  </div>
+
+  <div class="mod-nav">
+    <button class="nav-btn prev" data-prev="m7"><div class="nav-lbl">← Anterior</div><div class="nav-title">Psicologia &amp; vendas</div></button>
+    <button class="nav-btn next" data-next="m9"><div class="nav-lbl">Próximo</div><div class="nav-title">Telegram &amp; comunidade →</div></button>
+  </div>
+</article>
+
+<!-- ============ M9 ============ -->
+<article class="module" id="m-m9">
+  <header class="mod-head">
+    <div class="mod-eyebrow">Módulo 09 — Comunidade</div>
+    <h1 class="mod-title">Telegram &amp; <em>comunidade</em></h1>
+    <p class="mod-intro">É o degrau mais subestimado do funil — e o mais durável. Plataformas mudam, algoritmos banem contas, mas uma comunidade tua é tua. Aqui aprendes a usá-la como eu faço: <em>o intermediário entre tráfego e venda</em>.</p>
+  </header>
+
+  <section class="sec">
+    <h3>Porque é que faz diferença</h3>
+    <p>Quem te encontra no Pornhub ou no Twitter ainda não te conhece. Quem chega ao teu Telegram já procurou ativamente, já está envolvido. <strong>É a tua audiência mais quente</strong>.</p>
+    <p>O Telegram serve para duas coisas:</p>
+    <ul class="list">
+      <li><strong>Aquecer</strong> — quem chega aqui ainda não comprou. O canal vai expô-lo gradualmente à tua oferta para depois clicar no link do OF.</li>
+      <li><strong>Reter</strong> — quem já comprou continua a receber updates, sneak peaks, conversa. Mantém-se ligado mesmo quando não está a comprar.</li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <h3>Estrutura: canal vs grupo vs DM</h3>
+    <ul class="list">
+      <li><strong>Canal público (grátis)</strong> · só tu publicas. Updates, prévias, anúncios, conteúdo softer. Funciona como newsletter visual. Audiência ilimitada.</li>
+      <li><strong>Canal privado VIP (pago, opcional)</strong> · acesso a conteúdo mais explícito por subscrição direta (ex: €15/mês via Telegram Stars, criptomoeda ou link de pagamento externo). Replica o modelo OF dentro do TG.</li>
+      <li><strong>DM</strong> · não respondas individualmente. Direciona sempre para o canal ou para o OF. Caso contrário queimas-te.</li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <h3>O que publicar no canal — frequência sugerida</h3>
+    <ul class="list">
+      <li><strong>Diariamente:</strong> 1–2 stories curtos (foto, frase, sensação). Mantém a notificação ativa, lembra que existes.</li>
+      <li><strong>2–3× por semana:</strong> prévia de conteúdo PPV que está no OF — "isto está no meu OF agora 🔥 [link]".</li>
+      <li><strong>1× por semana:</strong> teaser "behind the scenes" — gravação, processo, vibe pessoal (sempre dentro da persona, sem expor identidade real).</li>
+      <li><strong>Ocasional:</strong> mensagens de "ofertas limitadas" para criar escassez — "primeiros 5 que mandarem DM recebem PPV com 50% off".</li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <h3>Bots do Telegram — automatização real</h3>
+    <p>O Telegram tem bots nativos que automatizam venda, subscrição e segmentação. Para começar:</p>
+    <ul class="list">
+      <li><strong>@ShopBot / @StoreBot</strong> — montas uma loja dentro do TG. Útil para vender packs avulsos com pagamento direto. Configurável em horas.</li>
+      <li><strong>@Fleep</strong> — gere subscrições recorrentes (mensal/anual) para o teu canal VIP. Ideal para replicar o modelo OF dentro do TG.</li>
+      <li><strong>@ControllerBot</strong> — publica posts agendados em vários canais ao mesmo tempo, ideal se tens mais que um canal (público + VIP).</li>
+      <li><strong>@CombotOfficialBot</strong> — anti-spam e moderação automática para grupos (necessário se decidires abrir grupo de chat para fãs).</li>
+      <li><strong>Telegram Stars</strong> — moeda nativa lançada em 2024. Permite cobrar conteúdo dentro do TG sem dependência de pagamento externo. Cada vez mais usada por criadoras com receio de bloqueio de payment processors.</li>
+    </ul>
+    <p style="font-size:13px;color:var(--muted)">Como alternativa externa: <strong>ManyChat</strong> faz integração com TG (e WhatsApp, IG). Mais profissional, mas paga. Vale a pena quando passas das 5.000 inscrições no canal.</p>
+  </section>
+
+  <section class="sec">
+    <h3>Cross-promo entre canais — a alavanca subestimada</h3>
+    <p>É a forma mais rápida e barata de crescer no TG e ninguém fala disto. A lógica:</p>
+    <ul class="list">
+      <li>Identificas 5–10 criadoras do teu tamanho ou um pouco maiores no mesmo nicho.</li>
+      <li>Propões: "eu promovo o teu canal aos meus seguidores, tu promoves o meu aos teus". Win-win, custo zero.</li>
+      <li>Faz isto <strong>2× por mês</strong>, com criadoras diferentes. Em 6 meses, o canal triplica.</li>
+      <li>Para criadoras maiores, podes pagar promo (€20–100 dependendo do tamanho).</li>
+    </ul>
+    <div class="callout tip">
+      <div class="callout-label">Análogo</div>
+      <p>É o equivalente aos <strong>RT trains</strong> do X. Em qualquer plataforma de criadores, esta dinâmica de troca de tráfego existe — é o "marketing entre pares" que multiplica audiência sem ads.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h3>Exemplo de semana-tipo (real)</h3>
+    <p>Para tirares a improvisação da cabeça, aqui está uma estrutura concreta de semana — adapta ao teu ritmo:</p>
+    <div class="tbl">
+      <div class="tbl-row header"><div class="tbl-cell">Dia</div><div class="tbl-cell">Plataforma · Conteúdo</div></div>
+      <div class="tbl-row"><div class="tbl-cell"><strong>Segunda</strong></div><div class="tbl-cell">PH (vídeo novo) + IG (story sugestivo) + TG (story de aquecimento) + OF mass message com PPV €15</div></div>
+      <div class="tbl-row"><div class="tbl-cell"><strong>Terça</strong></div><div class="tbl-cell">X (3 posts ao longo do dia, RT train à noite) + TG (prévia do vídeo de quinta) + OF (post na timeline)</div></div>
+      <div class="tbl-row"><div class="tbl-cell"><strong>Quarta</strong></div><div class="tbl-cell">Reddit (post em 2 subreddits relevantes) + IG (reel SFW) + TG (story behind-the-scenes) + OF mass message reativação fãs frios</div></div>
+      <div class="tbl-row"><div class="tbl-cell"><strong>Quinta</strong></div><div class="tbl-cell">PH (vídeo novo) + TikTok (reel viral attempt) + TG (link para OF + teaser) + OF mass message PPV premium €25</div></div>
+      <div class="tbl-row"><div class="tbl-cell"><strong>Sexta</strong></div><div class="tbl-cell">X (promo day) + TG (cross-promo com outra criadora) + IG (story de fim-de-semana) + OF posts + sexting com VIPs</div></div>
+      <div class="tbl-row"><div class="tbl-cell"><strong>Sáb/Dom</strong></div><div class="tbl-cell">Dia off OU gravação em batch para a semana seguinte. Apenas TG story diário automático.</div></div>
+    </div>
+    <p style="font-size:13px;color:var(--muted);margin-top:8px">Total: ~30h de trabalho ativo. Não é "publicar quando der" — é tratar isto como qualquer outro negócio.</p>
+  </section>
+
+  <div class="callout universal">
+    <div class="callout-label">Princípio universal — comunidade é o ativo durável</div>
+    <p>Quem tem comunidade tem sempre negócio. O OF pode banir-te amanhã. A tua conta Instagram pode desaparecer num update do algoritmo. Mas <strong>2.000 pessoas no teu Telegram não morrem</strong>. Onde fores, elas vão.</p>
+    <p>É por isto que toda a empresa séria — Apple, Substack, Notion, qualquer startup decente — investe em "comunidade". É o único ativo que sobrevive a mudanças de plataforma.</p>
+  </div>
+
+  <div class="quiz" data-quiz="m9">
+    <div class="quiz-head">
+      <div><div class="quiz-label">Quizz do módulo</div><div class="quiz-title">Usas a comunidade certa?</div></div>
+      <div class="quiz-prog" id="qp-m9">Pergunta 1 de 3</div>
+    </div>
+  </div>
+
+  <div class="mod-nav">
+    <button class="nav-btn prev" data-prev="m8"><div class="nav-lbl">← Anterior</div><div class="nav-title">Tráfego: motores reais</div></button>
+    <button class="nav-btn next" data-next="m10"><div class="nav-lbl">Próximo</div><div class="nav-title">Conteúdo que converte →</div></button>
+  </div>
+</article>
+
+<!-- ============ M10 ============ -->
+<article class="module" id="m-m10">
+  <header class="mod-head">
+    <div class="mod-eyebrow">Módulo 10 — Produção</div>
+    <h1 class="mod-title">Conteúdo que <em>converte</em></h1>
+    <p class="mod-intro">Conteúdo bonito não vende. Vende o conteúdo que <em>faz a pessoa dar o próximo passo</em>: parar o scroll, seguir, subscrever, comprar.</p>
+  </header>
+
+  <section class="sec">
+    <h3>Cada post tem uma função</h3>
+    <p>Há duas funções principais. Misturá-las estraga as duas.</p>
+    <ul class="list">
+      <li><strong>Atrair (topo de funil):</strong> trazer gente nova, parar o scroll. Imagens fortes, atitude, vibe. Pouca legenda. Não vendes — vendes <em>curiosidade</em>.</li>
+      <li><strong>Converter (fundo de funil):</strong> empurrar quem já te conhece para a subscrição/compra. Posts diretos, sugestão clara de "há mais no outro lado".</li>
+    </ul>
+    <div class="callout warn">
+      <div class="callout-label">Erro comum</div>
+      <p>Tentar fazer as duas coisas no mesmo post. Resultado: faz mal as duas. Decide a função <em>antes</em> de gravar.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h3>Qualidade &gt; Quantidade</h3>
+    <p>Postar 20 vezes por dia conteúdo fraco é ruído. Mínimos que não falham:</p>
+    <ul class="list compact">
+      <li>Boa luz (natural ou ring light).</li>
+      <li>Imagem nítida.</li>
+      <li>Fundo limpo — sem cozinha à mostra.</li>
+      <li>Enquadramento pensado.</li>
+      <li>Variação — ângulos, distâncias, roupas, ambientes.</li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <h3>Planeamento simples</h3>
+    <p>Improvisar mata o ritmo. Calendário básico:</p>
+    <ul class="list">
+      <li>Define quantos posts por semana em cada plataforma.</li>
+      <li>Grava em batch — várias coisas num dia, varia roupa.</li>
+      <li>Tem sempre 2 semanas de banco para dias maus.</li>
+      <li>Distribui com lógica — não 3 vídeos iguais seguidos.</li>
+    </ul>
+  </section>
+
+  <div class="callout universal">
+    <div class="callout-label">Princípio universal — função &gt; volume</div>
+    <p>Em qualquer canal de conteúdo (YouTube, blog, newsletter, LinkedIn), quem é medíocre faz volume. Quem é bom faz função. <strong>Pergunta a ti próprio antes de cada peça: "Que ação quero que a pessoa tome depois de ver isto?"</strong> Se não tens resposta, não publiques.</p>
+  </div>
+
+  <div class="quiz" data-quiz="m10">
+    <div class="quiz-head">
+      <div><div class="quiz-label">Quizz do módulo</div><div class="quiz-title">Produzes com intenção?</div></div>
+      <div class="quiz-prog" id="qp-m10">Pergunta 1 de 3</div>
+    </div>
+  </div>
+
+  <div class="mod-nav">
+    <button class="nav-btn prev" data-prev="m9"><div class="nav-lbl">← Anterior</div><div class="nav-title">Telegram &amp; comunidade</div></button>
+    <button class="nav-btn next" data-next="m11"><div class="nav-lbl">Próximo</div><div class="nav-title">Demonstrar expertise →</div></button>
+  </div>
+</article>
+
+<!-- ============ M11 — A TÉCNICA CENTRAL ============ -->
+<article class="module" id="m-m11">
+  <header class="mod-head">
+    <div class="mod-eyebrow">Módulo 11 — A técnica multiplicadora</div>
+    <h1 class="mod-title">Demonstrar <em>expertise</em></h1>
+    <p class="mod-intro">Esta é a técnica de crescimento mais poderosa e mais ignorada do marketing digital. Quem percebe duplica o negócio. Quem não percebe fica preso a vender só uma coisa toda a vida.</p>
+  </header>
+
+  <section class="sec">
+    <h3>O efeito barbeiro</h3>
+    <p>Dois barbeiros na mesma rua, mesma qualidade técnica:</p>
+    <p><strong>Barbeiro A</strong> publica fotos dos cortes. "Olha que bem ficou este cliente". 500 seguidores. Vende cortes.</p>
+    <p><strong>Barbeiro B</strong> publica vídeos a explicar: "Como faço esta degradação". "3 erros que vejo barbeiros amadores cometerem". "Truque para barba simétrica". 50.000 seguidores. Vende cortes — <em>e muito mais</em>.</p>
+    <p>O Barbeiro B atrai dois mercados ao mesmo tempo:</p>
+    <ul class="list">
+      <li><strong>Outros barbeiros</strong> que querem aprender — vão acabar a comprar-lhe curso, workshop ou produtos que recomenda.</li>
+      <li><strong>Clientes finais</strong> que ao verem que ele <em>sabe explicar</em> a técnica, ficam <strong>seguros</strong> de que ele é o melhor. "Se ensina os outros, deve ser bom mesmo." Vão lá cortar o cabelo.</li>
+    </ul>
+    <div class="callout tip">
+      <div class="callout-label">O multiplicador</div>
+      <p>O mesmo conteúdo atrai dois mercados, gera duas fontes de receita, com o mesmo esforço. Este é o efeito que separa quem cresce linearmente de quem cresce exponencialmente.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h3>Aplicado a OnlyFans (e a quem está a ler este manual)</h3>
+    <p>Se estás a vender conteúdo adulto, "demonstrar expertise" é o teu motor secundário mais subaproveitado. Não tens de mostrar a tua cara para o fazer.</p>
+    <p>Aplicações concretas:</p>
+    <ul class="list">
+      <li><strong>Vídeos sobre o teu processo</strong> (sem expor identidade) — "como gravo packs", "como escolho looks", "como organizo o meu OF". Atraem <em>fãs</em> (que veem que sabes o que fazes e confiam mais) <strong>e</strong> outras pessoas que querem aprender e vão pagar pelo teu curso.</li>
+      <li><strong>Reviews honestas de equipamento</strong> (ring lights, câmaras, apps) — affiliate marketing.</li>
+      <li><strong>O meu caso</strong> · partilho publicamente parte da arquitetura em entrevistas e conteúdo. Resultado: quem ouve isso percebe que sei o que faço, gasta mais no meu OF <em>e</em> alguns querem aprender a fazer o mesmo. <em>Cria mercado dos dois lados.</em></li>
+      <li><strong>Mentoria / curso</strong> · este manual que estás a ler é exatamente isso. Quem o vende tem dupla receita: OF + curso.</li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <h3>A regra das 3 camadas</h3>
+    <p>Estrutura todo o conteúdo de "demonstrar expertise" em 3 níveis:</p>
+    <div class="tbl">
+      <div class="tbl-row header"><div class="tbl-cell">Camada</div><div class="tbl-cell">O quê / preço</div></div>
+      <div class="tbl-row">
+        <div class="tbl-cell"><strong>1 · Grátis (público)</strong></div>
+        <div class="tbl-cell">Explicações, tutoriais, princípios. 80% do conteúdo. Atrai audiência e demonstra autoridade.</div>
+      </div>
+      <div class="tbl-row">
+        <div class="tbl-cell"><strong>2 · Produto inicial</strong></div>
+        <div class="tbl-cell">Guia/e-book/curso curto. <strong>€15–60</strong>. Converte os curiosos que querem "ir um nível mais a fundo".</div>
+      </div>
+      <div class="tbl-row">
+        <div class="tbl-cell"><strong>3 · Premium</strong></div>
+        <div class="tbl-cell">Mentoria 1:1 / consulting / masterclass / comunidade paga. <strong>€200–2000+</strong>. Pequena % do público, maior parte do lucro.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h3>O medo que te impede de fazer isto</h3>
+    <p>"Mas se eu ensinar como faço, os concorrentes copiam."</p>
+    <div class="callout warn">
+      <div class="callout-label">Errado</div>
+      <p>Copiam à mesma. A diferença é que tu ficaste invisível e eles ficaram com a audiência. <strong>A execução é onde está a diferença</strong>, não no conhecimento. Toda a gente sabe como fazer um corte de cabelo bom. Poucos sabem fazer. Partilhar know-how não te tira nada — atrai-te tudo.</p>
+    </div>
+  </section>
+
+  <div class="callout universal">
+    <div class="callout-label">Princípio universal — o multiplicador</div>
+    <p>Esta é a técnica que está por trás de praticamente todo o criador online que escala bem: o YouTuber que faz tutoriais e depois vende curso. O fundador de startup que escreve no Twitter sobre como construiu e depois cobra mentoria. O dentista que faz Instagram a explicar procedimentos e enche a clínica.</p>
+    <p><strong>Ensinar é o melhor anúncio que existe.</strong> E é gratuito.</p>
+  </div>
+
+  <div class="quiz" data-quiz="m11">
+    <div class="quiz-head">
+      <div><div class="quiz-label">Quizz do módulo</div><div class="quiz-title">Sabes multiplicar?</div></div>
+      <div class="quiz-prog" id="qp-m11">Pergunta 1 de 4</div>
+    </div>
+  </div>
+
+  <div class="mod-nav">
+    <button class="nav-btn prev" data-prev="m10"><div class="nav-lbl">← Anterior</div><div class="nav-title">Conteúdo que converte</div></button>
+    <button class="nav-btn next" data-next="m12"><div class="nav-lbl">Próximo</div><div class="nav-title">Saída &amp; diversificação →</div></button>
+  </div>
+</article>
+
+<!-- ============ M12 ============ -->
+<article class="module" id="m-m12">
+  <header class="mod-head">
+    <div class="mod-eyebrow">Módulo 12 — Final</div>
+    <h1 class="mod-title">Saída &amp; <em>diversificação</em></h1>
+    <p class="mod-intro">Ninguém faz conteúdo adulto a vida toda. Quem não pensa na saída desde o início fica preso. O objetivo nunca foi fazer isto para sempre — foi usar isto para construir algo que dure muito depois de parares.</p>
+  </header>
+
+  <section class="sec">
+    <h3>A realidade que ninguém te diz</h3>
+    <p>Nenhum top criador fica na indústria 20 anos. Por escolha, por idade, por exposição, por mercado a mudar — ninguém. Os que se safam são os que usaram o pico de receita para construir outra coisa. Os que não se safam ficaram com o dinheiro gasto e nada construído.</p>
+    <div class="callout warn">
+      <div class="callout-label">A pior armadilha</div>
+      <p>O dinheiro deste mercado vem em picos. 3 anos a faturar bem, 30 anos para viver. Quem trata isto como salário e gasta tudo no presente fica sem rede quando os picos acabam.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h3>A regra dos 3 anos</h3>
+    <p>Tens (com sorte) 3–5 anos no pico. O que fazes com esse tempo decide se sais com fortuna ou com saudades.</p>
+    <ul class="list">
+      <li><strong>Ano 1 — Constrói:</strong> sistema, audiência, primeiro rendimento estável.</li>
+      <li><strong>Ano 2 — Maximiza:</strong> ticket médio, diversificação de plataformas, segundo produto (curso/mentoria/affiliate).</li>
+      <li><strong>Ano 3 — Transiciona:</strong> empurra o que construíste como negócio sustentável. O OF passa a ser uma das pernas, não a única.</li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <h3>Diversificar plataformas</h3>
+    <p>Não fiques só no <span class="brand"><svg class="brand-icon" viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><text x="12" y="15.5" text-anchor="middle" font-size="8" font-family="Arial" font-weight="700" fill="currentColor" stroke="none">of</text></svg></span> OnlyFans. Alternativas a conhecer:</p>
+    <div class="tbl">
+      <div class="tbl-row header"><div class="tbl-cell">Plataforma</div><div class="tbl-cell">Característica</div></div>
+      <div class="tbl-row"><div class="tbl-cell"><strong>OnlyFans</strong></div><div class="tbl-cell">20% comissão. Maior tráfego. Padrão de mercado.</div></div>
+      <div class="tbl-row"><div class="tbl-cell"><strong>Fansly</strong></div><div class="tbl-cell">Comissão similar mas mais permissiva. Audiência menor mas mais ativa.</div></div>
+      <div class="tbl-row"><div class="tbl-cell"><strong>Fanvue</strong></div><div class="tbl-cell">Plataforma mais recente. Paga melhor em alguns casos. Em crescimento.</div></div>
+      <div class="tbl-row"><div class="tbl-cell"><strong>Privacy</strong></div><div class="tbl-cell">Plataforma portuguesa, suporte em PT. Ideal para mercado lusófono nacional.</div></div>
+      <div class="tbl-row"><div class="tbl-cell"><strong>LoyalFans</strong></div><div class="tbl-cell">Mais focada em comunidade e fidelização. Ticket médio alto.</div></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h3>Onde colocar o dinheiro durante o pico</h3>
+    <p>Erro 1: gastar tudo. Erro 2: pôr tudo na conta poupança a render 0,5%.</p>
+    <p>Estrutura simples como orientação (não é aconselhamento financeiro):</p>
+    <ul class="list">
+      <li><strong>30% — Reserva</strong> · 6 meses de despesas em conta poupança/Wise. Não tocas.</li>
+      <li><strong>40% — Investimento de longo prazo</strong> · ETFs globais (ex: VWCE, VOO) via Trading 212, DEGIRO, XTB. Compra mensal automática.</li>
+      <li><strong>20% — Reinvestimento no negócio</strong> · equipamento melhor, ads, formação tua.</li>
+      <li><strong>10% — Goza a vida agora</strong> · não vale a pena trabalhar para nunca aproveitar.</li>
+    </ul>
+    <div class="callout warn">
+      <div class="callout-label">Importante (PT)</div>
+      <p>Em Portugal isto é rendimento. Categoria B (atividade independente) com NIF e atividade aberta em Finanças. Fala com contabilista — Autoridade Tributária não é zona para improvisar.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h3>O verdadeiro objetivo</h3>
+    <div class="quote">O conteúdo adulto não é o fim. É o motor que paga a entrada no negócio que quiseres ter depois. Vê isto como capital semente — não como salário.</div>
+    <p>Se sais desta indústria com audiência tua, reserva financeira sólida, skills de marketing digital ao mais alto nível, e um segundo produto a render — não saíste. Evoluíste. E é exatamente isso que separa quem fez disto uma fase de quem fez disto um ponto de partida.</p>
+  </section>
+
+  <div class="callout universal">
+    <div class="callout-label">Princípio universal — todo o negócio precisa de exit strategy</div>
+    <p>Não é só nesta indústria. Todo o fundador inteligente pensa "como será o dia em que eu sair desta empresa". Todo o investidor pensa em horizonte de saída. Todo o profissional pensa em "que skills levo daqui para o próximo passo".</p>
+    <p><strong>Quem só pensa em entrar, fica preso. Quem pensa em sair desde o dia 1, sai por cima.</strong></p>
+  </div>
+
+  <div class="quiz" data-quiz="m12">
+    <div class="quiz-head">
+      <div><div class="quiz-label">Quizz do módulo</div><div class="quiz-title">Pensas na saída?</div></div>
+      <div class="quiz-prog" id="qp-m12">Pergunta 1 de 3</div>
+    </div>
+  </div>
+
+  <div class="final">
+    <h3>Acabaste o manual.<br><em>Agora é execução.</em></h3>
+    <p>Mais ninguém te vai pagar para fazer isto — só tu. Volta aos módulos sempre que precisares. As ideias não rendem; a aplicação rende.</p>
+  </div>
+
+  <div class="mod-nav">
+    <button class="nav-btn prev" data-prev="m11"><div class="nav-lbl">← Anterior</div><div class="nav-title">Demonstrar expertise</div></button>
+    <button class="nav-btn next" disabled><div class="nav-lbl">Fim do manual</div><div class="nav-title">✓ Concluído</div></button>
+  </div>
+</article>
+
+</main>
+</div>
+
+<!-- ============ QUIZ DATA + LOGIC ============ -->
+<script>
+const QUIZZES = {
+  "m1":[
+    {q:"O que é mais realista esperar dos primeiros 60-90 dias?",
+     opts:["Faturar 4 dígitos rapidamente","Pouco ou nenhum rendimento — é fase de construção","Ficar viral logo no TikTok","Recuperar o investimento do curso"],
+     correct:1,exp:"Os primeiros meses são para construir base, audiência e identidade. Quem espera dinheiro rápido desiste antes do sistema render."},
+    {q:"Onde está a maior parte do dinheiro neste mercado?",
+     opts:["Nas subscrições mensais","No PPV, mensagens pagas e custom","Nas tips/gorjetas","Em ser viral nas redes"],
+     correct:1,exp:"A subscrição é só a porta de entrada. O dinheiro real está no que vendes a quem já é cliente — PPV, mensagens, custom."},
+    {q:"Por que é que partilho a minha arquitetura ao longo deste manual?",
+     opts:["Para me promover","Para mostrar que a estrutura PH → TG → OF se pode decompor e replicar em qualquer nível de exposição","Para inflar o ego","Sem motivo específico"],
+     correct:1,exp:"O meu nível de exposição é escolha pessoal — o que interessa é a estrutura: tráfego → comunidade → conversão. Funciona em qualquer nível."}
+  ],
+  "m2":[
+    {q:"Que nível da pirâmide costuma ter menos concorrência e clientes mais obsessivos?",
+     opts:["Nível 5 (explícito com terceiros)","Nível 4 (explícito solo)","Nível 1 (tease/SFW: feet, fitness)","Nível 3 (softcore)"],
+     correct:2,exp:"Nichos de Nível 1 são especializados, têm clientes obsessivos e menos concorrência. Top 5% num nicho pequeno bate ser invisível num grande."},
+    {q:"Cliente está a pressionar-te a subir de nível. O que fazes?",
+     opts:["Subo, paga bem","Subo se ele aumentar o que paga","Recuso — só subo quando EU decido e estrategicamente","Bloqueio sempre"],
+     correct:2,exp:"Subir para um cliente é vender a tua única vantagem por trocos. Decisão de subir é estratégica, planeada, com preço acima — não cedência."},
+    {q:"O que importa mais para o teu rendimento — o nível ou a estratégia?",
+     opts:["O nível: explícito sempre rende mais","Estratégia: persona, marketing e mensagens","Sorte e algoritmo","Quantidade de conteúdo"],
+     correct:1,exp:"Top earners de Nível 1 e 2 ganham mais que muitos do Nível 4 e 5. A nudez não vende — a sensação vende."},
+    {q:"Para que serve o 'Princípio universal' de posicionamento de nicho?",
+     opts:["Para impressionar amigos","Para perceber que ser melhor para 1 nicho > ser razoável para todos, em qualquer mercado","Para vender mais","Para parecer profissional"],
+     correct:1,exp:"O barbeiro especialista em barba grisalha cobra 3x mais. Quem domina um nicho específico fatura mais que quem tenta ser para todos. Foco vence."}
+  ],
+  "m3":[
+    {q:"Quando se devem definir os 4 limites?",
+     opts:["Quando aparecer o problema","Antes de começar — sob pressão decides sempre mal","Com o tempo descobres","Não importa, depende"],
+     correct:1,exp:"Limites são contrato contigo, não com o cliente. Se não os defines antes, decides sob pressão — e decides sempre mal."},
+    {q:"Limites emocionais existem para...",
+     opts:["Cumprir regras da plataforma","Não confundires a personagem com a vida real","Pareceres profissional","Cobrares mais"],
+     correct:1,exp:"Estás a criar uma experiência, não uma relação. Misturar emoções pessoais com clientes destrói o negócio e a tua cabeça."},
+    {q:"Aplicado a qualquer negócio, limites são...",
+     opts:["Opcionais","Luxo","O que separa profissional de amador — escalas porque dizes 'não'","Para clientes difíceis"],
+     correct:2,exp:"O freelancer que aceita 'só uma alteração' 50 vezes não tem negócio. Quem aprende a dizer não cresce mais rápido em qualquer mercado."}
+  ],
+  "m4":[
+    {q:"O que é mais importante: o nome ou a persona?",
+     opts:["O nome — primeira impressão","A persona — é o que cria ligação consistente","Iguais","Depende"],
+     correct:1,exp:"O nome só tem de ser fácil de decorar. A persona é o que faz a pessoa reconhecer-te sem ver o nome. É aí que está o valor."},
+    {q:"Persona consistente entre plataformas é...",
+     opts:["Opcional","Importante mas difícil","O que faz a transição entre Pornhub, Telegram e OF parecer natural — e por isso monetizável","Só para grandes criadores"],
+     correct:2,exp:"Persona idêntica em todas as plataformas faz a transição parecer natural. É o que permite que a pessoa do PH vá até ao OF sem fricção."},
+    {q:"Aplicado a marca pessoal universal, persona significa...",
+     opts:["Ser falso","Ser consistente em quem és — Ronaldo, Jobs, o teu barbeiro favorito fazem isto","Mudar com tendências","Apenas redes sociais"],
+     correct:1,exp:"A pessoa é o produto. O que vendes é variável; a marca pessoal é a constante. Vale para futebol, computadores ou barbearia."}
+  ],
+  "m5":[
+    {q:"Qual é a arquitetura de 3 camadas que sustenta as operações mais bem sucedidas?",
+     opts:["Conteúdo → Likes → Vendas","Tráfego → Comunidade → Conversão","OF → Instagram → TikTok","Subscrição → PPV → Custom"],
+     correct:1,exp:"Tráfego atrai desconhecidos. Comunidade aproxima interessados. Conversão é onde está o pagamento. Cada camada tem função específica."},
+    {q:"O que acontece quando tentas vender direto no tráfego (sem comunidade no meio)?",
+     opts:["Vendes mais rápido","Assustas os curiosos e perdes a maior parte antes de aquecerem","Não há diferença","Funciona melhor"],
+     correct:1,exp:"Quem ainda não te conhece não compra. A comunidade é o aquecedor. Pular essa camada é como pedir alguém em casamento no primeiro encontro."},
+    {q:"Na minha arquitetura, qual é a função do Telegram?",
+     opts:["Substituir o OF","Filtro de público quente que prepara a venda no OF","Postar conteúdo grátis","Conversar com fãs"],
+     correct:1,exp:"Telegram é o degrau intermédio. Quem chega lá já está envolvido — a venda no OF acontece quase automaticamente. É o multiplicador silencioso."},
+    {q:"O modelo Tráfego → Comunidade → Conversão aplica-se a...",
+     opts:["Apenas OF","Apenas mercado adulto","Praticamente qualquer negócio digital (YouTube, SaaS, coaching, e-commerce)","Negócios físicos"],
+     correct:2,exp:"YouTuber: YouTube → Newsletter → Curso. SaaS: SEO → Trial → Paid. Coach: TikTok → DM → 1:1. É a mesma estrutura em qualquer mercado online."}
+  ],
+  "m6":[
+    {q:"Para quem está a começar, qual é o modelo de subscrição geralmente recomendado nos primeiros meses?",
+     opts:["Subscrição paga €25/mês","Subscrição grátis com monetização agressiva via PPV/mensagens","Subscrição grátis sem PPV","Subscrição €100/mês"],
+     correct:1,exp:"Subscrição grátis nos primeiros 3 meses: atrai volume, treina vendas por mensagem, percebes o que converte. Depois podes migrar para paga."},
+    {q:"O que é o Tip Menu?",
+     opts:["Lista pública de ações/conteúdos com preço, comprável com um clique","Funcionalidade só para fãs VIP","Sistema de gorjetas aleatórias","O preço da subscrição"],
+     correct:0,exp:"Tip Menu é como o menu de pequeno-almoço dum hotel. A maioria não vai pedir tudo, mas ver opções faz com que peça pelo menos uma."},
+    {q:"Por que é importante segmentar fãs em listas (VIP, Ativos, Frios, Freeloaders)?",
+     opts:["Para parecer profissional","Porque tratar todos igual deixa dinheiro na mesa — o top 10% paga 80% das contas","Por exigência da plataforma","Por organização visual"],
+     correct:1,exp:"O cliente que gastou €500 não pode receber o mesmo tratamento que o de €5. Segmentação é o que separa quem maximiza ticket médio de quem manda mensagens em massa para o vazio."},
+    {q:"Qual é a frequência ideal de mass messages com PPV?",
+     opts:["1 por mês","Diariamente","2 a 4 por semana com PPV adequado ao segmento","Sempre que apetecer"],
+     correct:2,exp:"2 a 4 mass messages por semana, cada uma com PPV adequado ao segmento. Não envias só 'para falar' — cada mensagem tem oferta clara."}
+  ],
+  "m7":[
+    {q:"O que faz alguém pagar quando há conteúdo grátis em todo o lado?",
+     opts:["Mais nudez","Atenção individual, curiosidade, ilusão de proximidade, exclusividade","Preço mais baixo","Mais quantidade"],
+     correct:1,exp:"Não estás a vender pixels — Pornhub tem isso de graça. Vendes uma experiência, uma personagem, uma sensação de acesso."},
+    {q:"A mensagem 'oi amor queres ver um vídeo especial 20€?' vende?",
+     opts:["Sim, se for direto","Às vezes","Não — falta gancho, curiosidade, ligação. A venda é consequência da conversa","Depende da hora"],
+     correct:2,exp:"Sem conversa, sem curiosidade construída, a mensagem morre. Estrutura: gancho → curiosidade → provocação → oferta. Nunca atires a oferta no vazio."},
+    {q:"Push & Pull é...",
+     opts:["Ignorar clientes","Alternar atenção e distância para criar dinâmica","Sempre dar atenção","Sempre estar distante"],
+     correct:1,exp:"Sempre disponível = perdes valor. Sempre distante = perdes interesse. Alternar faz a pessoa investir mais atenção a manter o contacto."},
+    {q:"Estas técnicas (curiosidade, push & pull, conversa que vende) chamam-se em marketing...",
+     opts:["Spam","Copywriting — a skill mais bem paga do marketing","Posting","Networking"],
+     correct:1,exp:"O Ogilvy fazia isto em anúncios de carros nos anos 60. Quem domina venda por DM aqui pode vender qualquer coisa em qualquer canal — é a competência mais transferível."}
+  ],
+  "m8":[
+    {q:"Qual é a fonte de tráfego adulto mais subestimada para quem está disposto a explícito?",
+     opts:["TikTok","Instagram","Pornhub","Facebook"],
+     correct:2,exp:"Pornhub tem o maior tráfego adulto da internet, permite conteúdo grátis explícito, e o algoritmo favorece consistência. É o motor principal na minha operação."},
+    {q:"Qual é a melhor estratégia de plataformas para começar?",
+     opts:["Estar em 5 redes ao mesmo tempo","Domina 2 motores — um explícito (PH/X/Reddit) e um civil (IG/TikTok)","Só OF","Só TikTok"],
+     correct:1,exp:"Quem tenta estar em todas, não domina nenhuma. Foco vence ambição cega — 10 vídeos numa plataforma rendem mais que 2 em cinco."},
+    {q:"Como evitar bans no Instagram/TikTok?",
+     opts:["Postar tudo explícito","Trocadilhos, sugestão, variar conteúdo, evitar hashtags óbvias, sem spam de 'link na bio'","Posting frequente","Hashtags do nicho adulto"],
+     correct:1,exp:"O algoritmo detecta padrões. Curiosidade subtil > nudez direta. E 'link na bio' em cada post é flag automático."}
+  ],
+  "m9":[
+    {q:"Qual é a função principal do Telegram no funil?",
+     opts:["Substituir o OF","Aquecer audiência fria e reter clientes — degrau intermédio entre tráfego e venda","Postar conteúdo grátis","Conversar com freeloaders"],
+     correct:1,exp:"Quem chega ao TG já procurou ativamente — está mais envolvido. Aquece o frio, retém o quente. É o multiplicador silencioso."},
+    {q:"Devo responder DMs individualmente no Telegram?",
+     opts:["Sim, sempre","Não — direciona para o canal ou para o OF, senão queimas-te","Só os clientes pagantes","Quando der tempo"],
+     correct:1,exp:"Responder individualmente no TG sem monetizar é trabalho gratuito. DMs servem para direcionar ao OF onde está o pagamento."},
+    {q:"Por que é a comunidade o ativo mais durável?",
+     opts:["Porque é grátis","Porque plataformas podem banir-te, mas uma comunidade tua sobrevive — vai contigo para onde fores","Porque é fácil","Porque dá likes"],
+     correct:1,exp:"OF pode banir, IG pode falhar, algoritmos mudam. 2.000 pessoas no teu Telegram não morrem. É por isto que toda a empresa séria investe em comunidade."}
+  ],
+  "m10":[
+    {q:"Cada post deve ter qual função?",
+     opts:["Likes","Atrair OU converter — nunca os dois ao mesmo tempo","Vender direto","Engagement"],
+     correct:1,exp:"Misturar atrair com converter no mesmo post faz mal as duas coisas. Decide a função antes de criar."},
+    {q:"Vale mais 20 posts/dia fracos ou 5 posts/semana fortes?",
+     opts:["20 posts fracos — volume","5 posts fortes — intenção","Iguais","Depende do nicho"],
+     correct:1,exp:"Volume sem qualidade é ruído. Consistência é publicar com intenção, sem baixar a fasquia só para parecer ativo."},
+    {q:"O princípio universal de 'função > volume' aplica-se a...",
+     opts:["Só conteúdo adulto","Só redes sociais","Qualquer canal de conteúdo: YouTube, blog, newsletter, LinkedIn — pergunta sempre que ação queres que a pessoa tome","Apenas TikTok"],
+     correct:2,exp:"Antes de cada peça: 'que ação quero que a pessoa tome depois?'. Se não há resposta, não publicas. Vale em qualquer canal."}
+  ],
+  "m11":[
+    {q:"O Barbeiro B publica vídeos a explicar técnicas. Que mercados atrai?",
+     opts:["Só clientes","Só outros barbeiros","Dois ao mesmo tempo: outros barbeiros (que compram cursos) E clientes (que confiam mais por verem o conhecimento)","Nenhum"],
+     correct:2,exp:"O conteúdo educativo demonstra expertise. Atrai dois mercados com o mesmo esforço — clientes que confiam e aspirantes que pagam por aprender."},
+    {q:"O medo 'se ensinar como faço, copiam' é...",
+     opts:["Válido — protege know-how","Errado — copiam à mesma, mas tu ficas invisível enquanto eles têm a audiência","Verdade em certos casos","Decisão pessoal"],
+     correct:1,exp:"Toda a gente sabe como fazer um corte bom. Poucos sabem fazer. A execução é o diferenciador, não o conhecimento. Partilhar atrai-te tudo."},
+    {q:"Na regra das 3 camadas, qual deve ser ~80% do teu conteúdo?",
+     opts:["Camada 1 — Grátis (público)","Camada 2 — Produto inicial","Camada 3 — Premium","50/50"],
+     correct:0,exp:"A Camada 1 grátis é o motor de tráfego. Sem ela, ninguém chega às camadas pagas. Investe a maior parte da produção aqui."},
+    {q:"Aplicado a OF, 'demonstrar expertise' pode ser...",
+     opts:["Mostrar mais nudez","Vídeos sobre o teu processo (gravação, organização) — atraem clientes E aspirantes a criadores que vão comprar curso/mentoria","Mais posts por dia","Mais tags"],
+     correct:1,exp:"Mostrar o lado de negócio (sem expor identidade) cria duplo mercado. É exatamente o motor por trás de quem vende curso/mentoria sobre OF — receita extra com a mesma audiência."}
+  ],
+  "m12":[
+    {q:"Quanto tempo em média um criador fica no pico de receita?",
+     opts:["20 anos","10 anos","3-5 anos","Para sempre"],
+     correct:2,exp:"Por idade, exposição ou mercado a mudar, ninguém fica no pico para sempre. Os que se safam usaram o pico para construir outra coisa."},
+    {q:"Qual é o erro número 1 com o dinheiro do pico?",
+     opts:["Investir demais","Gastar tudo no presente sem construir nada para depois","Poupar demais","Investir em ETFs"],
+     correct:1,exp:"O dinheiro vem em picos. 3 anos a faturar, 30 para viver. Quem gasta tudo fica sem rede quando os picos acabam."},
+    {q:"O verdadeiro objetivo de fazer conteúdo adulto online deve ser...",
+     opts:["Fazer isto para sempre","Capital semente para construir algo durável (audiência, marca, investimento)","Comprar luxo","Ficar famoso"],
+     correct:1,exp:"Vê isto como motor que paga a entrada no negócio que quiseres ter depois. Saída inteligente > permanência sem plano."}
+  ]
+};
+
+// ===== WATERMARK (anti-piracy) =====
+(function watermark(){
+  const params = new URLSearchParams(window.location.search);
+  const email = (params.get('e') || params.get('email') || '').trim();
+  const display = email || 'demo@itsxlilix.com — modo preview';
+  // pill no topbar
+  const pill = document.querySelector('#wmPill .wm-email');
+  if(pill) pill.textContent = display;
+  // pattern de fundo repetido (visível em screenshots)
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='420' height='180' viewBox='0 0 420 180'>
+    <text x='10' y='90' font-family='Inter,sans-serif' font-size='14' fill='%236e1c2e' transform='rotate(-22 210 90)'>${display.replace(/[<>"&]/g,'')}</text>
+  </svg>`;
+  const url = 'url("data:image/svg+xml;utf8,' + encodeURIComponent(svg).replace(/'/g,'%27') + '")';
+  document.documentElement.style.setProperty('--wm-pattern', url);
+})();
+
+// ===== STATE =====
+const state = JSON.parse(localStorage.getItem('itsxlilix_v1') || '{"completed":{},"current":"m1"}');
+function saveState(){localStorage.setItem('itsxlilix_v1',JSON.stringify(state))}
+
+// ===== MODULE NAV =====
+function showModule(modId){
+  state.current=modId;saveState();
+  document.querySelectorAll('.module').forEach(m=>m.classList.toggle('active',m.id==='m-'+modId));
+  document.querySelectorAll('.side-item').forEach(i=>i.classList.toggle('active',i.dataset.mod===modId));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.side-item').forEach(item=>{
+  item.addEventListener('click',()=>showModule(item.dataset.mod));
+});
+document.querySelectorAll('.nav-btn[data-next]').forEach(btn=>{
+  btn.addEventListener('click',()=>showModule(btn.dataset.next));
+});
+document.querySelectorAll('.nav-btn[data-prev]').forEach(btn=>{
+  btn.addEventListener('click',()=>showModule(btn.dataset.prev));
+});
+
+// ===== QUIZ RENDER =====
+function renderQuiz(quizId){
+  const data=QUIZZES[quizId];if(!data)return;
+  const container=document.querySelector('[data-quiz="'+quizId+'"]');
+  if(container.dataset.rendered)return;
+  container.dataset.rendered='1';
+  let qIdx=0,correctCount=0;
+  const renderQ=()=>{
+    const q=data[qIdx];
+    container.querySelectorAll('.question').forEach(el=>el.remove());
+    container.querySelectorAll('.results').forEach(el=>el.remove());
+    const qDiv=document.createElement('div');
+    qDiv.className='question active';
+    qDiv.innerHTML=`
+      <div class="q-text">${q.q}</div>
+      <div class="opts">
+        ${q.opts.map((o,i)=>`<button class="opt" data-i="${i}"><span class="opt-letter">${String.fromCharCode(65+i)}</span><span>${o}</span></button>`).join('')}
+      </div>
+      <div class="feedback"></div>
+      <div class="q-nav">
+        <button class="btn primary next-q" style="display:none">${qIdx<data.length-1?'Próxima →':'Ver resultado'}</button>
+      </div>
+    `;
+    container.appendChild(qDiv);
+    document.getElementById('qp-'+quizId).textContent='Pergunta '+(qIdx+1)+' de '+data.length;
+    qDiv.querySelectorAll('.opt').forEach(opt=>{
+      opt.addEventListener('click',()=>{
+        if(qDiv.querySelector('.opt.locked'))return;
+        const choice=parseInt(opt.dataset.i);
+        qDiv.querySelectorAll('.opt').forEach(o=>o.classList.add('locked'));
+        if(choice===q.correct){
+          opt.classList.add('correct');correctCount++;
+          qDiv.querySelector('.feedback').className='feedback correct show';
+          qDiv.querySelector('.feedback').innerHTML='<b>Correto.</b>'+q.exp;
+        }else{
+          opt.classList.add('wrong');
+          qDiv.querySelector('.opt[data-i="'+q.correct+'"]').classList.add('correct');
+          qDiv.querySelectorAll('.opt').forEach(o=>{
+            if(!o.classList.contains('correct')&&!o.classList.contains('wrong'))o.classList.add('dimmed');
+          });
+          qDiv.querySelector('.feedback').className='feedback wrong show';
+          qDiv.querySelector('.feedback').innerHTML='<b>Não é bem isto.</b>'+q.exp;
+        }
+        qDiv.querySelector('.next-q').style.display='inline-block';
+      });
+    });
+    qDiv.querySelector('.next-q').addEventListener('click',()=>{
+      if(qIdx<data.length-1){qIdx++;renderQ();}else{showResult();}
+    });
+  };
+  const showResult=()=>{
+    container.querySelectorAll('.question').forEach(el=>el.remove());
+    const pct=Math.round((correctCount/data.length)*100);
+    let msg='';
+    if(pct===100)msg='Domínio total. Avança.';
+    else if(pct>=70)msg='Sólido. Revê os pontos que falharam e avança.';
+    else if(pct>=50)msg='Há trabalho a fazer. Volta ao módulo e relê com atenção.';
+    else msg='Não estás a apanhar o material. Não avances assim.';
+    const moduleEl=container.closest('.module');
+    const nextNavBtn=moduleEl?moduleEl.querySelector('.mod-nav .nav-btn.next:not([disabled])'):null;
+    const hasNext=!!nextNavBtn;
+    const div=document.createElement('div');
+    div.className='results show';
+    div.innerHTML=`
+      <div class="score-num">${correctCount}<em>/${data.length}</em></div>
+      <div class="score-lbl">${pct}% correto</div>
+      <p class="score-msg">${msg}</p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <button class="btn" id="retry-${quizId}">Repetir quizz</button>
+        ${hasNext?`<button class="btn primary" id="next-${quizId}">Próximo módulo →</button>`:''}
+      </div>
+    `;
+    container.appendChild(div);
+    document.getElementById('qp-'+quizId).textContent='Concluído';
+    if(pct>=70){state.completed[quizId]=true;saveState();updateProgress();markDone(quizId);}
+    document.getElementById('retry-'+quizId).addEventListener('click',()=>{qIdx=0;correctCount=0;renderQ();});
+    if(hasNext)document.getElementById('next-'+quizId).addEventListener('click',()=>nextNavBtn.click());
+  };
+  renderQ();
+}
+document.querySelectorAll('[data-quiz]').forEach(q=>renderQuiz(q.dataset.quiz));
+
+// ===== PROGRESS =====
+function updateProgress(){
+  const total=Object.keys(QUIZZES).length;
+  const done=Object.keys(state.completed).length;
+  const pct=Math.round((done/total)*100);
+  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('progressText').textContent=pct+'% completo';
+}
+function markDone(quizId){
+  document.querySelectorAll('.side-item[data-mod="'+quizId+'"]').forEach(item=>item.classList.add('done'));
+}
+
+// ===== FADE IN ON SCROLL =====
+const sections = document.querySelectorAll('.sec, .callout, .pyramid, .funnel, .tbl, .template, .quote');
+sections.forEach(s=>s.classList.add('fade-in'));
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}});
+},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+sections.forEach(s=>io.observe(s));
+
+// ===== INIT =====
+Object.keys(state.completed).forEach(qid=>markDone(qid));
+updateProgress();
+if(state.current && state.current!=='m1') showModule(state.current);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "itsxlilix-shop",
+  "version": "1.0.0",
+  "description": "ItsXliLix course landing + checkout",
+  "private": true,
+  "scripts": {
+    "dev": "netlify dev",
+    "deploy": "netlify deploy --prod"
+  },
+  "dependencies": {
+    "stripe": "^14.0.0"
+  },
+  "devDependencies": {
+    "netlify-cli": "^17.0.0"
+  }
+}
