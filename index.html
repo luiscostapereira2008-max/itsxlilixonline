@@ -373,7 +373,7 @@ body::before{
 
 <footer class="footer">
   <span class="logo"><span class="logo-mark"></span>ItsXLiliX</span>
-  <a href="mailto:hello@itsxlilix.com">hello@itsxlilix.com</a>
+  <a href="mailto:help@onlineincitsxlilix.com">help@onlineincitsxlilix.com</a>
 </footer>
 
 <script>
@@ -390,7 +390,7 @@ async function buy(){
     if(data.url){ window.location.href = data.url; }
     else{ throw new Error(data.error || 'Erro ao criar checkout'); }
   }catch(e){
-    alert('Erro: ' + e.message + '\nTenta novamente ou contacta hello@itsxlilix.com');
+    alert('Erro: ' + e.message + '\nTenta novamente ou contacta help@onlineincitsxlilix.com');
     btns.forEach(b=>{ b.disabled = false; b.innerHTML = b.dataset.orig; });
   }
 }
