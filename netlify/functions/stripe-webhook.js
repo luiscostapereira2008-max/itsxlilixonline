@@ -48,7 +48,8 @@ exports.handler = async (event) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          from: 'ItsXliLix <hello@itsxlilix.com>',
+          from: 'ItsXliLix <help@onlineincitsxlilix.com>',
+          reply_to: 'luiscostapereira2008@gmail.com',
           to: [email],
           subject: 'O teu acesso ao manual ItsXliLix',
           html: `
