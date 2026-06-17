@@ -1,4 +1,5 @@
 // netlify/functions/stripe-webhook.js
+// (no repo, coloca este ficheiro em: netlify/functions/stripe-webhook.js)
 // Recebe o evento 'checkout.session.completed', gera link assinado e envia email via Resend
 
 const Stripe = require('stripe');
@@ -30,7 +31,7 @@ exports.handler = async (event) => {
       return { statusCode: 400, body: 'No email' };
     }
 
-    // assina email com ACCESS_SECRET (HMAC) — anti-tampering
+    // assina email com ACCESS_SECRET (HMAC) — para ter signature anti-tampering no link
     const sig = crypto
       .createHmac('sha256', process.env.ACCESS_SECRET)
       .update(email.toLowerCase())
@@ -52,6 +53,23 @@ exports.handler = async (event) => {
           reply_to: 'luiscostapereira2008@gmail.com',
           to: [email],
           subject: 'O teu acesso ao manual ItsXliLix',
+          // Plain-text alternative — exigida por bons spam filters (Gmail, Outlook).
+          // Emails só-HTML são penalizados; com ambos a entrega é muito melhor.
+          text: `Obrigada${name ? ', ' + name.split(' ')[0] : ''}.
+
+O teu acesso ao manual ItsXliLix está pronto. É vitalício e pessoal.
+
+Acede aqui (guarda nos favoritos):
+${link}
+
+Este link tem o teu email associado e aparece visível dentro do curso. Não partilhes — se for partilhado, vamos saber quem foi.
+
+Dúvidas? Responde a este email.
+Reembolso até 7 dias após a compra — basta pedir.
+
+—
+ItsXliLix · Manual
+help@onlineincitsxlilix.com`,
           html: `
             <div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto;padding:32px;color:#14110b">
               <h1 style="font-family:Georgia,serif;font-weight:400;font-size:28px;margin:0 0 18px;letter-spacing:-0.5px">Obrigada${name ? ', ' + name.split(' ')[0] : ''}.</h1>
@@ -85,5 +103,6 @@ exports.handler = async (event) => {
     return { statusCode: 200, body: JSON.stringify({ received: true, email }) };
   }
 
+  // outros eventos
   return { statusCode: 200, body: JSON.stringify({ received: true }) };
 };
