@@ -21,8 +21,25 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: `Webhook Error: ${err.message}` };
   }
 
-  if (stripeEvent.type === 'checkout.session.completed') {
+  // Aceita ambos os eventos:
+  // - checkout.session.completed → cartão / MBWay aprovado / Klarna (síncrono)
+  // - checkout.session.async_payment_succeeded → Multibanco / MBWay pendente confirmados depois
+  const triggerEvents = [
+    'checkout.session.completed',
+    'checkout.session.async_payment_succeeded',
+  ];
+
+  if (triggerEvents.includes(stripeEvent.type)) {
     const session = stripeEvent.data.object;
+
+    // Crucial: só envia email se pagamento confirmado.
+    // Em checkout.session.completed com Multibanco/MBWay pendente, payment_status === 'unpaid'.
+    // O email vai sair depois, quando vier o async_payment_succeeded com payment_status === 'paid'.
+    if (session.payment_status !== 'paid') {
+      console.log('Session not paid yet, skipping email. Event:', stripeEvent.type, 'Status:', session.payment_status);
+      return { statusCode: 200, body: JSON.stringify({ received: true, skipped: 'unpaid' }) };
+    }
+
     const email = session.customer_details && session.customer_details.email;
     const name = (session.customer_details && session.customer_details.name) || '';
 
