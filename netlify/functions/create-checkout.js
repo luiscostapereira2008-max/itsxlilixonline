@@ -22,10 +22,11 @@ exports.handler = async (event) => {
 
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
-      // Usa todos os métodos de pagamento activados no Stripe Dashboard
-      // (cartão, MBWay, Multibanco, Klarna, Link, etc.).
-      // Para ativar/desativar métodos, vai a Dashboard → Settings → Payment methods.
-      automatic_payment_methods: { enabled: true },
+      // Métodos de pagamento aceites. TÊM de estar activados também no
+      // Stripe Dashboard → Settings → Payment methods, senão dão erro.
+      // Para adicionar mais (ex: 'klarna', 'link', 'sepa_debit'),
+      // ativa primeiro no dashboard e depois adiciona aqui.
+      payment_method_types: ['card', 'mbway', 'multibanco'],
       line_items: [{
         price_data: {
           currency: 'eur',
