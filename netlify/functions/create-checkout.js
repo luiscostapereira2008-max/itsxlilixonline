@@ -26,7 +26,7 @@ exports.handler = async (event) => {
       // Stripe Dashboard → Settings → Payment methods, senão dão erro.
       // Para adicionar mais (ex: 'klarna', 'link', 'sepa_debit'),
       // ativa primeiro no dashboard e depois adiciona aqui.
-      payment_method_types: ['card', 'mbway', 'multibanco'],
+      payment_method_types: ['card', 'mb_way', 'multibanco'],
       line_items: [{
         price_data: {
           currency: 'eur',
